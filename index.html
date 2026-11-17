@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>作文批改器</title>
+<meta name="description" content="用你自己的 Claude 批改學測國文、英文作文：估分、逐句挑錯或眉批、兩版改寫，產生一頁可以傳給學生的網頁。免費、開源。">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<style>
+  .lead { padding: 26px 2px 20px; }
+  .lead h1 { font: 700 34px/1.25 var(--ming); letter-spacing: .04em; }
+  .lead p { margin-top: 10px; font-size: 16.5px; line-height: 1.75; color: var(--ink2); }
+  .lead .ex { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .lead .ex a, .btn {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 22px;
+    text-decoration: none; font-size: 15px; font-weight: 600; border: 1px solid var(--rim); background: var(--fill); color: var(--ink);
+  }
+  .btn.main { background: var(--gold-num); color: #3a2604; border-color: rgba(255, 255, 255, .6); box-shadow: 0 8px 20px -12px rgba(96, 54, 8, .8); }
+  .btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .way .who { display: flex; gap: 12px; align-items: center; margin-bottom: 8px; }
+  .way .who h2 { font-size: 21px; font-weight: 700; line-height: 1.3; }
+  .way .who p { font-size: 14px; color: var(--muted); }
+  .way .need { font-size: 14.5px; color: var(--ink2); line-height: 1.7; margin: 4px 0 12px; }
+  .way .btns { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 4px; }
+  .way h3 { font-size: 16.5px; font-weight: 700; margin: 18px 0 2px; }
+  .howto li span { min-width: 0; }
+  .note-s { font-size: 14px; color: var(--muted); line-height: 1.7; margin-top: 4px; }
+  .cmd { display: flex; gap: 10px; align-items: flex-start; margin-top: 8px; padding: 10px 12px; border-radius: var(--r-card); background: var(--fill); border: 1px solid var(--line); }
+  .cmd code { flex: 1; min-width: 0; font: 13.5px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--ink); overflow-wrap: anywhere; }
+  .cmp { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.6; }
+  .cmp th, .cmp td { text-align: left; vertical-align: top; padding: 9px 8px; border-top: 1px solid var(--line); }
+  .cmp thead th { border-top: 0; font-size: 14px; color: var(--muted); font-weight: 600; }
+  .cmp tbody th { font-weight: 600; color: var(--ink2); white-space: nowrap; }
+  .faq details { border-top: 1px solid var(--line); padding: 12px 0; }
+  .faq details:first-of-type { border-top: 0; }
+  .faq summary { cursor: pointer; font-size: 16.5px; font-weight: 600; min-height: 28px; }
+  .faq details p, .faq details ul { margin-top: 8px; font-size: 15px; line-height: 1.75; color: var(--ink2); }
+  .faq details ul { padding-left: 1.2em; }
+  .faq details li + li { margin-top: 4px; }
+  .foot { font-size: 13.5px; color: var(--muted); line-height: 1.8; padding: 22px 2px 0; }
+  .foot a { color: var(--ink2); }
+  @media (max-width: 480px) { .lead h1 { font-size: 29px; } .cmp { font-size: 14px; } }
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+<div class="waves" aria-hidden="true"><svg viewBox="0 0 1200 300" preserveAspectRatio="none"><path class="a" d="M0 150c120-50 240-60 380-20s250 60 400 10 280-70 420-10v170H0z"/><path class="b" d="M0 215c160-40 300-30 430 0s260 40 390 0 250-40 380 0v85H0z"/></svg></div>
+<header class="wrap top">
+  <span class="wordmark">作文批改器</span>
+  <button class="pill icon theme" type="button" aria-label="切換白天或晚上的配色"><span class="sun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/></svg></span><span class="moon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.2 8.2 0 1 0 10.2 10.2z"/></svg></span></button>
+</header>
+<main class="wrap">
+
+<section class="lead">
+  <h1>用自己的 Claude<br>改學測作文</h1>
+  <p>貼上題目和學生的作文，照片也可以。它會照大考中心的評分表估分，英文逐句挑錯，國文逐句寫眉批，再照學生原本的骨架改寫兩版。最後產生一頁網頁，可以直接傳給學生。</p>
+  <p>免費、開源。要有 Claude 的付費方案（Pro 以上），批改用的是你自己的額度。</p>
+  <div class="ex">
+    <a href="examples/site/01-reunion.html">英文範例〈團圓飯〉</a>
+    <a href="examples/site/02-caged-bird.html">國文範例〈籠中鳥〉</a>
+  </div>
+</section>
+
+<section class="card way" id="web">
+  <div class="who"><span class="tile zh">一</span><div><h2>Claude 網頁版或 App</h2><p>最簡單，不用安裝</p></div></div>
+  <p class="need">在 claude.ai 或 Claude App 裡上傳一個技能檔，之後在一般的對話裡貼作文就能批改。</p>
+  <div class="btns">
+    <a class="btn main" href="https://github.com/lukevin202106-hub/gsat-essay-grader/releases/latest/download/gsat-essay-grader-skill.zip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5M5 19.5h14"/></svg>下載技能檔</a>
+  </div>
+  <ol class="howto">
+    <li><span>下載上面的 zip 檔。不用解壓縮。</span></li>
+    <li><span>打開 claude.ai 或 Claude App，到<b>設定（Settings）→ 功能（Capabilities）</b>，打開<b>程式執行與檔案建立</b>（Code execution and file creation）。</span></li>
+    <li><span>到<b>自訂（Customize）→ 技能（Skills）</b>，按 <b>＋</b> →<b>建立技能</b>→<b>上傳技能</b>（Upload a skill），選剛剛下載的 zip。</span></li>
+    <li><span>開一個新對話，在工具選單打開<b>網路搜尋</b>，貼上題目和作文，說「幫我改這篇作文」。</span></li>
+    <li><span>批完會給你一個網頁檔。下載以後，用瀏覽器打開就是批改頁。</span></li>
+  </ol>
+  <p class="note-s">介面的名稱會隨 Claude 改版調整，找不到時在設定裡找「技能」或「Skills」。對話選 Sonnet 就夠用，要最好的品質選 Opus。</p>
+</section>
+
+<section class="card way" id="code">
+  <div class="who"><span class="tile en">二</span><div><h2>Claude Code</h2><p>完整版，四個角色分工</p></div></div>
+  <p class="need">收集資料、診斷、改寫、盲審由四個 Claude 分開做，可以選三種等級，查過的資料會存下來給下一篇用。安裝程式會幫你裝好 Claude Code、Python 和作文批改器。需要 macOS 13 以上，或 Windows 10 以上。</p>
+
+  <h3>Mac</h3>
+  <div class="btns">
+    <a class="btn main" href="https://github.com/lukevin202106-hub/gsat-essay-grader/releases/latest/download/gsat-essay-grader-mac.zip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5M5 19.5h14"/></svg>下載 Mac 安裝檔</a>
+  </div>
+  <ol class="howto">
+    <li><span>打開下載的 zip，雙擊裡面的<b>安裝作文批改器</b>。</span></li>
+    <li><span>如果出現「Apple 無法驗證」的視窗：先按<b>完成</b>，到<b>系統設定 → 隱私權與安全性</b>，拉到最下面按<b>強制打開</b>（或<b>仍要打開</b>）。舊一點的 macOS 可以在檔案上按右鍵 →<b>打開</b>。</span></li>
+    <li><span>照視窗裡的說明做。第一次可能要先裝 Apple 的「指令列工具」，裝好以後再雙擊一次安裝檔。</span></li>
+  </ol>
+  <p class="note-s">不想處理那個視窗的話，也可以打開「終端機」（應用程式 → 工具程式），貼上這一行，按 Enter：</p>
+  <div class="cmd"><code>curl -fsSL https://lukevin202106-hub.github.io/gsat-essay-grader/install/install.sh | bash</code><button type="button" class="copy" data-t="curl -fsSL https://lukevin202106-hub.github.io/gsat-essay-grader/install/install.sh | bash">複製</button></div>
+
+  <h3>Windows</h3>
+  <div class="btns">
+    <a class="btn main" href="https://github.com/lukevin202106-hub/gsat-essay-grader/releases/latest/download/gsat-essay-grader-windows.zip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5M5 19.5h14"/></svg>下載 Windows 安裝檔</a>
+  </div>
+  <ol class="howto">
+    <li><span>在下載的 zip 上按右鍵 →<b>解壓縮全部</b>，打開解壓縮出來的資料夾。直接在 zip 裡面雙擊不會動。</span></li>
+    <li><span>雙擊 <b>install.bat</b>。如果出現藍色的「Windows 已保護您的電腦」，按<b>其他資訊</b>→<b>仍要執行</b>。</span></li>
+    <li><span>照視窗裡的說明做。沒有 Python 的話，它會自動裝。</span></li>
+  </ol>
+  <p class="note-s">也可以打開 PowerShell，貼上這一行，按 Enter：</p>
+  <div class="cmd"><code>irm https://lukevin202106-hub.github.io/gsat-essay-grader/install/install.ps1 -OutFile "$env:TEMP\gsat-install.ps1"; powershell -NoProfile -ExecutionPolicy Bypass -File "$env:TEMP\gsat-install.ps1"</code><button type="button" class="copy" data-t="irm https://lukevin202106-hub.github.io/gsat-essay-grader/install/install.ps1 -OutFile &quot;$env:TEMP\gsat-install.ps1&quot;; powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$env:TEMP\gsat-install.ps1&quot;">複製</button></div>
+
+  <h3>裝好以後</h3>
+  <ol class="howto">
+    <li><span>「文件」裡會多一個<b>作文批改</b>資料夾。雙擊裡面的<b>開始批改</b>。</span></li>
+    <li><span>第一次會請你選配色、用瀏覽器登入 Claude，再問你信不信任這個資料夾，選 <b>Yes</b>。</span></li>
+    <li><span>貼上題目和作文，照片可以直接拖進視窗。說「用最好的」換成最好的等級，說「用測試等級」只用最便宜的模型試流程。</span></li>
+    <li><span>批完會在 <b>site</b> 資料夾產生網頁檔，雙擊就能看。</span></li>
+  </ol>
+</section>
+
+<section class="card">
+  <div class="card-h"><h2>兩種有什麼不同</h2></div>
+  <div class="tablewrap"><table class="cmp">
+    <thead><tr><th scope="col"></th><th scope="col">網頁版或 App</th><th scope="col">Claude Code</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">安裝</th><td>上傳一個檔</td><td>跑一次安裝程式</td></tr>
+      <tr><th scope="row">怎麼做</th><td>同一個 Claude 從頭做到尾，最後自己審一次</td><td>四個 Claude 分工，盲審的那一個沒看過前面的過程</td></tr>
+      <tr><th scope="row">模型</th><td>對話選哪一個就用哪一個</td><td>省錢、最好、測試三種等級，每一步配不同模型</td></tr>
+      <tr><th scope="row">資料</th><td>每次對話重新查</td><td>同一題查過的資料存下來，下一篇不用重查</td></tr>
+      <tr><th scope="row">成品</th><td>對話裡給一個網頁檔</td><td>存在電腦的資料夾，能發佈成 Claude 網頁</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="card faq">
+  <div class="card-h"><h2>常見問題</h2></div>
+  <details><summary>要錢嗎？</summary><p>作文批改器免費。批改是用你自己的 Claude，要有 Pro 以上的付費方案，用掉的算在你的用量額度裡，不另外收費。</p></details>
+  <details><summary>學生的作文會傳到哪裡？</summary><p>只會交給你自己的 Claude 批改。Claude Code 版的作文和成品都存在你電腦的「作文批改」資料夾；網頁版在你的 Claude 對話裡。作文批改器本身不會把作文送到別的地方。</p></details>
+  <details><summary>分數準嗎？</summary><p>是照大考中心的評分表估的，不是正式成績，實際閱卷可能差一兩分。每一項都會寫扣在哪裡，那些說明比分數有用。</p></details>
+  <details><summary>英文裡的「學測精選」是什麼？</summary><p>allinone App（App Store 搜尋「Allinone 讀書計畫」）整理的學測精選 3,000 字和 1,259 條片語句型。高分版會換成這些字，批改頁附上中文和例句。</p></details>
+  <details><summary>怎麼更新、怎麼移除？</summary>
+    <ul>
+      <li>更新：Claude Code 版再跑一次安裝程式；網頁版到「技能」刪掉舊的，再上傳新的。</li>
+      <li>移除 Claude Code 版：在終端機或 PowerShell 打 <code>claude plugin uninstall gsat-essay-grader@gsat-essay-grader</code>，再刪掉家目錄裡的 <code>.gsat-essay-grader</code> 資料夾。「作文批改」資料夾裡是你的作文，要不要刪自己決定。</li>
+    </ul>
+  </details>
+  <details><summary>出問題了</summary><p>把畫面截圖，到 <a href="https://github.com/lukevin202106-hub/gsat-essay-grader/issues">GitHub</a> 開一個 issue。</p></details>
+</section>
+
+<footer class="foot">
+  程式以 MIT 授權開源：<a href="https://github.com/lukevin202106-hub/gsat-essay-grader">github.com/lukevin202106-hub/gsat-essay-grader</a>。<br>
+  學測精選字表取自 allinone，以 CC BY-NC 4.0 授權。範例作文經作者同意公開。
+</footer>
+</main>
+<script src="assets/app.js" defer></script>
+</body>
+</html>

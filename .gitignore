@@ -9,3 +9,4 @@ node_modules/
 /bank/
 /site/
 /.essay-grader
+dist/

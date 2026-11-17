@@ -27,11 +27,20 @@
 
 給學生看的文字用老師在紙邊寫幾句的口氣：平、短、具體，不喊口號。
 
-## 安裝
+## 下載與安裝
 
-需要 Claude Code、Python 3.9 以上、Node.js 18 以上。
+**沒用過終端機也可以**：到下載頁照著做：**https://lukevin202106-hub.github.io/gsat-essay-grader/**
 
-在 Claude Code 裡打：
+兩種用法，都要有 Claude 的付費方案（Pro 以上）：
+
+| | 怎麼裝 | 適合 |
+|---|---|---|
+| Claude 網頁版或 App | 下載 [技能檔](https://github.com/lukevin202106-hub/gsat-essay-grader/releases/latest/download/gsat-essay-grader-skill.zip)，到 Claude 的「自訂 → 技能」上傳 | 最簡單，不用安裝任何東西 |
+| Claude Code（完整版） | 下載 [Mac 安裝檔](https://github.com/lukevin202106-hub/gsat-essay-grader/releases/latest/download/gsat-essay-grader-mac.zip) 或 [Windows 安裝檔](https://github.com/lukevin202106-hub/gsat-essay-grader/releases/latest/download/gsat-essay-grader-windows.zip)，雙擊安裝 | 四個角色分工、三種等級、查過的資料會存下來 |
+
+安裝檔會幫你裝好 Claude Code、Python 和作文批改器，在「文件」建一個「作文批改」資料夾，以後雙擊裡面的「開始批改」就好。
+
+已經在用 Claude Code 的人，也可以直接裝外掛（需要 Python 3.9 以上）：
 
 ```
 /plugin marketplace add lukevin202106-hub/gsat-essay-grader
@@ -40,7 +49,7 @@
 
 ## 使用
 
-1. 開一個放作文的資料夾，在那裡開 Claude Code。
+1. 開一個放作文的資料夾，在那裡開 Claude Code（用安裝檔的話，雙擊「開始批改」）。
 2. 說「幫我改這篇作文」，貼上題目和作文（或照片）；也可以打 `/gsat-essay-grader:grade`。
 3. 第一次會問工作資料夾放哪。之後批完會產生 `site/NN-名稱.html`；如果你的 Claude Code 能發佈 Claude 網頁（Artifact），會直接發佈成一頁網頁，預設只有你看得到，要給學生看再分享連結。
 
@@ -72,7 +81,11 @@ Codex、Gemini CLI 這類工具沒有實測過。流程寫在 `skills/grade/SKIL
 .claude-plugin/   外掛與市集設定
 skills/grade/     批改流程（SKILL.md）
 agents/           四個子代理：essay-collector、essay-diagnoser、essay-rewriter、essay-reviewer
-tools/            ws.py（工作資料夾）、vocab.py（查字表）、merge.py（拼檔）、bank.py（題目資料）、build.mjs＋english.mjs（產生網頁）
+tools/            ws.py（工作資料夾）、vocab.py（查字表）、merge.py（拼檔）、bank.py（題目資料）、build.py（產生網頁）；只需要 Python 3.9 以上
+web-skill/        Claude 網頁版的技能說明（打包成技能檔）
+install/          Mac、Windows 安裝程式
+scripts/          package.py：打包三個下載檔（發 Release 用）
+index.html        下載頁（GitHub Pages）
 assets/           網頁的樣式與程式（會包進每一頁）
 data/             學測精選字表
 examples/         兩篇範例：drafts/ 原稿、content/ 批改檔、site/ 網頁
@@ -98,4 +111,4 @@ tiers.json        三個等級用哪個模型
 /plugin install gsat-essay-grader@gsat-essay-grader
 ```
 
-Then paste an essay and say "grade this essay" (the output is in Traditional Chinese). Three tiers: `usual` (Haiku + Sonnet, default), `best` (Fable/Opus), `test` (all Haiku). Code is MIT; the bundled GSAT vocabulary list (`data/gsat-vocab.json`, from the allinone app) is CC BY-NC 4.0.
+Then paste an essay and say "grade this essay" (the output is in Traditional Chinese). No terminal experience? The download page (https://lukevin202106-hub.github.io/gsat-essay-grader/) has a skill file for claude.ai and one-click installers for macOS and Windows. Three tiers: `usual` (Haiku + Sonnet, default), `best` (Fable/Opus), `test` (all Haiku). Code is MIT; the bundled GSAT vocabulary list (`data/gsat-vocab.json`, from the allinone app) is CC BY-NC 4.0.

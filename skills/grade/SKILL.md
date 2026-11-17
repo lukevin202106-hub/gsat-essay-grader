@@ -11,6 +11,10 @@ description: 學測國文、英文作文批改（gsat-essay-grader）。使用�
 
 格式與流程都定好了，不要再問使用者格式、要不要改寫兩版。只有題目認不出來、原稿看不清楚、估分差很多拿不準時才問。
 
+使用者還沒給作文（例如從「開始批改」捷徑打開、只打了 `/gsat-essay-grader:grade`）：用一兩句話請他貼上題目和學生的作文（文字或照片都可以），順便說可以說「用最好的」「用測試等級」換等級，然後等他貼。
+
+指令裡的 `python3`：Windows 上不能用就改成 `python` 或 `py -3`。
+
 ## 等級（`${CLAUDE_PLUGIN_ROOT}/tiers.json`）
 
 | 等級 | 收集資料 | 診斷 | 改寫、修稿 | 盲審 | 一篇大約（API 牌價） |
@@ -39,7 +43,7 @@ description: 學測國文、英文作文批改（gsat-essay-grader）。使用�
 | 3 | 診斷 | essay-diagnoser | `work/<slug>/diagnosis.json` |
 | 4 | 改寫兩版（同時開 2 個） | essay-rewriter | 英文 `light.json`、`high.json`；國文 `east.json`、`west.json` |
 | 5 | 盲審（每版一個，沒看過前面的） | essay-reviewer | `review-<版>.json` → 交回寫那一版的 rewriter 修 |
-| 6 | 拼檔、檢查 | `python3 tools/merge.py work/<slug>` → `node tools/build.mjs content/<檔>.json` | `content/NN-slug.json`、`site/NN-slug.html` |
+| 6 | 拼檔、檢查 | `python3 tools/merge.py work/<slug>` → `python3 tools/build.py content/<檔>.json` | `content/NN-slug.json`、`site/NN-slug.html` |
 | 6.5 | 存題目資料 | `python3 tools/bank.py save work/<slug>` | 下次同一題不用重收 |
 | 7 | 讀一遍、發佈、回報 | 主線 | Claude 網頁或本機 HTML |
 
@@ -122,13 +126,13 @@ description: 學測國文、英文作文批改（gsat-essay-grader）。使用�
 ```
 cd <工作資料夾>
 python3 "${CLAUDE_PLUGIN_ROOT}/tools/merge.py" work/<slug>          # 拼成 content/NN-slug.json；英文接著補字表的中文例句並檢查標記
-node "${CLAUDE_PLUGIN_ROOT}/tools/build.mjs" content/NN-slug.json   # 原稿比對、標記數量、字數上限；有問題會列出來、不產生網頁
+python3 "${CLAUDE_PLUGIN_ROOT}/tools/build.py" content/NN-slug.json  # 原稿比對、標記數量、字數上限；有問題會列出來、不產生網頁
 ```
 
 ### 7 讀一遍、發佈、回報（主線）
 
 - 讀一遍學生看得到的字（verdict、why、note、眉批、總評），照「語氣」改掉不對的句子；直接改 content JSON，改完再 build。只印說明文字和兩版正文，不要把整份 content JSON 印出來（字卡、出處很長，白花額度）。
-- 發佈：有 Artifact 工具（Claude 網頁）就把 `site/NN-slug.html` 發佈成 Claude 網頁（預設只有自己看得到，要給學生看再在網頁上分享）；沒有就給使用者本機檔案的完整路徑，直接用瀏覽器打開，也可以傳給學生。
+- 發佈：有 Artifact 工具（Claude 網頁）就把 `site/NN-slug.html` 發佈成 Claude 網頁（預設只有自己看得到，要給學生看再在網頁上分享）；沒有就給使用者本機檔案的完整路徑，並用系統的方式幫他打開（Mac `open`、Windows `start`），也可以直接傳給學生。
 - 回報：等級、有沒有沿用題目資料、估分（各項）、挑錯或眉批幾處、兩版字數與約幾分、哪些細節是示範、盲審抓到什麼、哪裡沒把握。
 
 ## 語氣
