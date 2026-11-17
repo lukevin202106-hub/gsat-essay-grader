@@ -1,0 +1,12 @@
+{
+  "name": "gsat-essay-grader",
+  "version": "0.1.0",
+  "description": "學測國文、英文作文批改器：用你自己的 Claude 批改作文，估分、逐句眉批或挑錯、兩版改寫，產生一頁可以分享的網頁。",
+  "author": {
+    "name": "allinone"
+  },
+  "homepage": "https://github.com/lukevin202106-hub/gsat-essay-grader",
+  "repository": "https://github.com/lukevin202106-hub/gsat-essay-grader",
+  "license": "MIT",
+  "keywords": ["essay", "gsat", "學測", "作文", "批改", "education", "taiwan"]
+}

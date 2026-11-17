@@ -1,0 +1,11 @@
+.DS_Store
+__pycache__/
+*.pyc
+node_modules/
+# 自己的工作資料夾不要放在外掛裡；放了就別推上來
+/drafts/
+/work/
+/content/
+/bank/
+/site/
+/.essay-grader

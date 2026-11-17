@@ -1,0 +1,1086 @@
+{
+ "schema": 1,
+ "subject": "en",
+ "tier": "best",
+ "slug": "reunion",
+ "order": 1,
+ "tile": "A",
+ "kind": "英文作文",
+ "title": "團圓飯",
+ "origin": "allinone 學測精選練習卷 第 25 回 八、英文作文",
+ "reviewed": "2026 年 11 月 17 日",
+ "rawFile": "英文練習卷25_團圓飯.txt",
+ "list": {
+  "sub": "練習卷第 25 回・代溝",
+  "est": "14",
+  "estNote": "估分／20"
+ },
+ "prompt": {
+  "stem": "提示：不同世代的人成長環境不同，想法與習慣也常有差異。請寫一篇英文作文，文長至少 120 個單詞，文分兩段。第一段描述一次你和家中長輩因為想法或習慣不同而發生誤會或衝突的經驗；第二段說明你認為應該如何縮小世代之間的代溝，並說明理由。",
+  "minWords": 120,
+  "paras": 2
+ },
+ "suggest": {
+  "by": "app",
+  "items": [
+   {
+    "text": "reunion",
+    "id": "core-2/reunion",
+    "zh": "團聚、重聚"
+   },
+   {
+    "text": "absurd",
+    "id": "core-3/absurd",
+    "zh": "荒謬的、可笑的"
+   },
+   {
+    "text": "offend",
+    "id": "core-3/offend",
+    "zh": "冒犯、使不悅"
+   },
+   {
+    "text": "pretend",
+    "id": "core-2/pretend",
+    "zh": "假裝"
+   },
+   {
+    "text": "bias",
+    "id": "core-2/bias",
+    "zh": "偏見、偏心"
+   },
+   {
+    "text": "the generation gap",
+    "id": "phrases-writing/the-generation-gap",
+    "zh": "代溝"
+   },
+   {
+    "text": "Only when …",
+    "id": "phrases-writing/only-when",
+    "zh": "只有當…才…"
+   },
+   {
+    "text": "It is worth V-ing",
+    "id": "phrases-writing/it-is-worth-v-ing",
+    "zh": "值得…"
+   }
+  ]
+ },
+ "score": {
+  "value": 14,
+  "range": "13～15",
+  "max": 20,
+  "light": "16～17",
+  "high": "18～19",
+  "verdict": "估 14 分。照大考中心 113、114 年寫的五等級，14 分在「可」（10～14 分）的最上面，離「優」（15 分起）差 1 分。題目要的兩件事都寫到了，兩段的分工和順序也清楚；分數主要掉在文法，大錯有 14 處，其中 4 處擠在第二段同一句。全篇 228 字，超過 120 字，分兩段，沒有另外扣分。",
+  "parts": [
+   {
+    "k": "內容",
+    "v": 4,
+    "good": "第一段切題，細節具體：你在節食所以吃得少、長輩說你浪費、你不懂為什麼要煮這麼多、飯後彼此不講話。第二段有主題句（多溝通），也給了兩個做法。",
+    "lose": "第二段的理由都是一般的說法（不說出來就打不破隔閡、不同世代想法不同），沒有例子，也沒有回到第一段那頓飯。第一段停在「不講話」（第 13 處），沒寫你當時或後來怎麼想。照評分表，這是「相關細節」還不夠完整，所以給 4 不給 5。",
+    "full": "第二段每個做法配一個做得到的例子，例如下次先跟奶奶說自己在控制飲食，請她少煮兩道。結尾回頭提一次那頓團圓飯。第一段最後加一句心情。"
+   },
+   {
+    "k": "組織",
+    "v": 4,
+    "good": "分兩段，第一段說經過，第二段說看法，各做各的事。第一段照時間順序寫。第二段有 First、Second、All in all，開頭、發展、結尾都有。",
+    "lose": "轉承語有幾處不合：Thus 放在敘事裡偏硬（第 3 處），and 的地方意思是相反的（第 7 處），As time goes by 接不上第一段（第 14 處），In my opinion 和 I would argue 重複（第 17 處）。另外主題句說的是「多溝通」，Second 寫的是換位思考，跟主題句對不太上；Second 那句和 Hence 那句說的又是同一件事。",
+    "full": "轉承語照意思選，每句只留一個。主題句改成能包住兩個做法的說法，例如 both sides need to talk and listen；第二點補一句新的內容，不要只換個說法再講一次。"
+   },
+   {
+    "k": "文法句構",
+    "v": 3,
+    "good": "第一段幾乎都用過去式，第二段用現在式，分得清楚。句型有變化：句尾的分詞 forcing me to …、It is crucial for … to …（第 22 處）、only if … can we … 的倒裝（第 31 處），這三句都寫對了。",
+    "lose": "大錯 14 處，文法這一項佔 12 處。句子結構：第 11 處兩個子句中間沒有連接詞，第 26 處一句有兩個動詞。時態：第 5 處。主詞動詞一致：第 20 處。名詞單複數和冠詞：第 10、16、19、23、27、29 處。另有第 8 處 rest food、第 12 處 finish all。第 26～29 處都在同一句，那一句讀的人要猜意思。其他的錯不太影響理解，所以落在「可」的 3 分。",
+    "full": "寫完檢查四件事：敘事有沒有跳出過去式；單數主詞的現在式動詞有沒有加 s；可數名詞前面有沒有冠詞或複數；一個句子是不是只有一個主要動詞。這四件做到，大錯會少掉一大半。"
+   },
+   {
+    "k": "字彙拼字",
+    "v": 3,
+    "good": "全篇沒有拼錯字，大小寫也都對。reunion、feast、crucial、perspective、barrier 這幾個精選字用對了，blame … for（第 4 處）、break down barriers（第 24 處）的搭配也正確。",
+    "lose": "用字不當有幾處：grown-up environment 是照中文直翻（第 28 處），considerate 拿來當動詞（第 32 處），notions 的意思偏了（第 30 處）。搭配可以更準的：reduce 配 gap（第 15 處）、useful way（第 18 處）、youth（第 21 處）、keeping in shape（第 6 處）。建議用字八個只用對 reunion 一個。",
+    "full": "背單字時連詞性和常配的字一起記，例如 consider（動詞）和 considerate（形容詞）、narrow the gap。下次把建議用字再多用上兩三個，像 absurd、the generation gap、Only when …。"
+   }
+  ]
+ },
+ "original": {
+  "paras": [
+   "Last Lunar New Year, my family had a reunion at my grandmother's house. My grandmother prepared a feast {{e:for it}}, but I {{e:didn't eat that much}} because I was on a diet. {{e:Thus,}} my grandparents {{e:blamed me for wasting food}}. I {{e:have told}} them that I {{e:was keeping in shape}} {{e:and}} they didn't understand why young people care about their appearance so much, forcing me to finish {{e:rest food}}. {{e:From my perspective, I didn't understand the reason that}} my grandmother cooked {{e:so many}} {{e:obviously we couldn't}} {{e:finish all}}. As a result, {{e:we didn't talk anymore after the dinner}}.",
+   "{{e:As time goes by,}} there is growing concern about how to {{e:reduce}} {{e:generation gap}}. {{e:In my opinion, I would argue that}} communicating more is {{e:the most useful way}}. First, when {{e:the conflict}} {{e:occur}} between {{e:elders and youth}}, {{e:it is crucial for both sides to}} express their own {{e:thought}}. Otherwise, we will never {{e:break down barriers}}. Second, we should put ourselves in {{e:their shoes}}. It is a well-known fact that {{e:people live in}} {{e:different generation}} and {{e:grown-up environment}} {{e:will have great difference of}} {{e:notions}} and habits. Hence, {{e:only if we see things through their eyes can we avoid}} further misunderstanding. All in all, I {{e:considerate}} that it is possible for young people and seniors to get along with each other, as long as we put {{e:what I said above}} into practice."
+  ]
+ },
+ "errors": [
+  {
+   "level": "small",
+   "type": "代名詞",
+   "was": "prepared a feast for it",
+   "now": "prepared a feast for us",
+   "why": "it 指的是 reunion，讀的人要停一下才看得出來。寫 for us，直接說是煮給誰吃的。"
+  },
+  {
+   "level": "small",
+   "type": "口語",
+   "was": "I didn't eat that much",
+   "now": "I didn't eat much",
+   "why": "that much 是講話時的說法，前面也沒有可以比的量。作文裡寫 much 就夠了。"
+  },
+  {
+   "level": "small",
+   "type": "轉折詞",
+   "was": "Thus, my grandparents blamed me",
+   "now": "So my grandparents blamed me",
+   "why": "Thus 多用在說理的文章。這一段在講一件事的經過，用 So 比較順。"
+  },
+  {
+   "level": "good",
+   "type": "片語",
+   "was": "blamed me for wasting food",
+   "now": "My mother blamed me for coming home late.",
+   "why": "blame 人 for V-ing，介系詞和動名詞都對。blame 是精選字，這個用法留著。"
+  },
+  {
+   "level": "big",
+   "type": "時態",
+   "was": "I have told them that",
+   "now": "I told them that",
+   "why": "這是去年過年的事，前後都是過去式，只有這裡跳成現在完成式。改回過去式 told。"
+  },
+  {
+   "level": "small",
+   "type": "搭配",
+   "was": "I was keeping in shape",
+   "now": "I was trying to keep in shape",
+   "why": "keep in shape 說的是長期維持的狀態，不太用進行式。加 trying to，意思是「我想維持身材」，比較接近你要說的。"
+  },
+  {
+   "level": "small",
+   "type": "轉折詞",
+   "was": "keeping in shape and they didn't understand",
+   "now": "keep in shape, but they didn't understand",
+   "why": "你解釋了，他們還是不懂，前後的意思相反。and 換成 but，前面加逗號。"
+  },
+  {
+   "level": "big",
+   "type": "詞性",
+   "was": "finish rest food",
+   "now": "finish the rest of the food",
+   "why": "rest 是名詞，不能直接放在 food 前面當形容詞用。「剩下的…」寫 the rest of the ＋名詞。"
+  },
+  {
+   "level": "small",
+   "type": "冗詞",
+   "was": "From my perspective, I didn't understand the reason that my grandmother cooked",
+   "now": "From my perspective, it was absurd that my grandmother cooked",
+   "why": "From my perspective 已經是「在我看來」，後面再接 I didn't understand，同一個意思說了兩次。這裡換成 it was absurd that，順便用到建議字 absurd。只想小改的話，拿掉 From my perspective，寫 I didn't understand why 也可以。"
+  },
+  {
+   "level": "big",
+   "type": "可數名詞",
+   "was": "cooked so many",
+   "now": "cooked so many dishes",
+   "why": "many 後面要有可數名詞，這裡沒有。補上 dishes；要說食物的話寫 so much food。"
+  },
+  {
+   "level": "big",
+   "type": "句構",
+   "was": "my grandmother cooked so many obviously we couldn't finish",
+   "now": "my grandmother cooked so many dishes when we obviously couldn't finish",
+   "why": "my grandmother cooked … 和 we couldn't finish … 是兩個句子，中間沒有連接詞。加 when（明明…卻），obviously 移到 we 的後面。"
+  },
+  {
+   "level": "big",
+   "type": "代名詞",
+   "was": "we couldn't finish all",
+   "now": "we couldn't finish them all",
+   "why": "all 很少單獨當受詞，要說出是「全部的什麼」。前面改成 dishes，這裡就寫 them all；前面如果是 food，寫 it all。"
+  },
+  {
+   "level": "small",
+   "type": "指代",
+   "was": "we didn't talk anymore after the dinner",
+   "now": "my grandparents and I didn't talk to each other for the rest of the evening",
+   "why": "上一句的 we 是全家人，這一句的 we 是你和祖父母，讀的人要猜。把人寫出來。後面可以再加一句當時的心情，這一段就有收尾。"
+  },
+  {
+   "level": "small",
+   "type": "邏輯",
+   "was": "As time goes by, there is growing concern about",
+   "now": "Conflicts like this are common, and there is growing concern about",
+   "why": "As time goes by 是「隨著時間過去」，跟第一段那頓飯接不上。換成一句指回第一段的話，兩段就連起來了。後面的 there is growing concern about 用對了，留著。"
+  },
+  {
+   "level": "small",
+   "type": "搭配",
+   "was": "reduce generation gap",
+   "now": "narrow the generation gap",
+   "why": "gap 是「距離」，常配 narrow（縮小）或 bridge（跨過）。reduce 多用在數量上。"
+  },
+  {
+   "level": "big",
+   "type": "冠詞",
+   "was": "generation gap",
+   "now": "the generation gap",
+   "why": "gap 是可數名詞，前面不能空著。「代溝」固定寫 the generation gap，建議用字給的就是這個寫法。"
+  },
+  {
+   "level": "small",
+   "type": "冗詞",
+   "was": "In my opinion, I would argue that",
+   "now": "I would argue that",
+   "why": "In my opinion 和 I would argue 都是「我認為」，留一個就好。"
+  },
+  {
+   "level": "small",
+   "type": "搭配",
+   "was": "is the most useful way",
+   "now": "is the most effective way to do so",
+   "why": "說方法「有效」用 effective（精選字）。後面加 to do so，指回上一句的縮小代溝，讀的人才知道是做什麼的方法。"
+  },
+  {
+   "level": "big",
+   "type": "冠詞",
+   "was": "when the conflict occur",
+   "now": "when a conflict occurs",
+   "why": "the conflict 是指某一次特定的衝突。這裡講的是任何一次，用 a。"
+  },
+  {
+   "level": "big",
+   "type": "主詞動詞一致",
+   "was": "the conflict occur",
+   "now": "a conflict occurs",
+   "why": "主詞 conflict 是單數，現在式動詞要加 s。"
+  },
+  {
+   "level": "small",
+   "type": "用字",
+   "was": "between elders and youth",
+   "now": "between the elderly and the young",
+   "why": "youth 當「年輕人」要寫成 the youth 或 young people。這裡改成 the elderly and the young，兩邊對稱，elderly 是精選字。結尾你寫的是 young people and seniors，全篇用同一組說法會比較整齊。"
+  },
+  {
+   "level": "good",
+   "type": "句型",
+   "was": "it is crucial for both sides to express",
+   "now": "It is crucial for parents to listen to their children.",
+   "why": "It is ＋形容詞＋ for 人＋ to V 寫對了，crucial 是精選字。這個句型留著。"
+  },
+  {
+   "level": "big",
+   "type": "單複數",
+   "was": "express their own thought",
+   "now": "express their own thoughts",
+   "why": "thought 當「想法」是可數名詞。兩邊的人各有想法，用複數。"
+  },
+  {
+   "level": "good",
+   "type": "片語",
+   "was": "break down barriers",
+   "now": "break down the barriers between us",
+   "why": "break down barriers（打破隔閡）搭配正確，barrier 是精選字。加上 between us，會更清楚是誰和誰之間。"
+  },
+  {
+   "level": "small",
+   "type": "指代",
+   "was": "put ourselves in their shoes",
+   "now": "put ourselves in each other's shoes",
+   "why": "their 指誰沒有說。前面的 we 是兩邊的人，所以寫 each other's。下一句 through their eyes 也可以一起改成 through each other's eyes。put oneself in someone's shoes 這個片語本身用對了。"
+  },
+  {
+   "level": "big",
+   "type": "句構",
+   "was": "people live in different generation … will have",
+   "now": "people who grow up in different generations … have",
+   "why": "一句裡有 live 和 will have 兩個動詞，中間沒有連接。加 who，前半就變成形容 people 的子句。live 換成 grow up，「在不同世代長大」，後面的環境也能一起接。"
+  },
+  {
+   "level": "big",
+   "type": "單複數",
+   "was": "different generation",
+   "now": "different generations",
+   "why": "different 後面接可數名詞，要用複數。"
+  },
+  {
+   "level": "big",
+   "type": "中式英文",
+   "was": "different generation and grown-up environment",
+   "now": "grow up in different generations and environments",
+   "why": "grown-up 是「成年人、成年的」，grown-up environment 會被讀成「大人的環境」。「成長環境」是 the environment one grows up in；前面已經改成 grow up in，這裡留 environments 就好。"
+  },
+  {
+   "level": "big",
+   "type": "單複數",
+   "was": "will have great difference of notions and habits",
+   "now": "have great differences in values and habits",
+   "why": "difference 是可數名詞，這裡不只一種差別，用複數；「在…方面的差別」介系詞是 in。講一般的事實用現在式 have，不用 will。"
+  },
+  {
+   "level": "small",
+   "type": "用字",
+   "was": "notions and habits",
+   "now": "values and habits",
+   "why": "notion 是「概念、想法」，偏抽象。題目說的「想法」是看事情的觀念，用 values（價值觀，精選字）比較貼近，寫 ideas 也可以。"
+  },
+  {
+   "level": "good",
+   "type": "句型",
+   "was": "only if we see things through their eyes can we avoid",
+   "now": "Only when we listen to each other can we narrow the generation gap.",
+   "why": "only if 放在句首，後面 can we 倒裝，寫對了。建議用字的 Only when … 是同一種倒裝，下次可以換著用。see things through someone's eyes 也用得好。"
+  },
+  {
+   "level": "big",
+   "type": "詞性",
+   "was": "I considerate that",
+   "now": "I believe that",
+   "why": "considerate 是形容詞，意思是「體貼的」，不能當動詞。動詞是 consider；這裡說自己的看法，用 believe 比較自然。"
+  },
+  {
+   "level": "small",
+   "type": "指代",
+   "was": "put what I said above into practice",
+   "now": "put these two ideas into practice",
+   "why": "what I said above 是「我上面說的」，偏口語，主詞也從 we 跳到 I。上面說了兩個做法，寫 these two ideas 就清楚。put … into practice 用對了。"
+  }
+ ],
+ "suggestUse": [
+  {
+   "used": true,
+   "orig": "用到了：my family had a reunion",
+   "light": "had a reunion（照你的）",
+   "high": "for a reunion dinner（開頭照你的；結尾 our reunion dinner 再用一次，呼應第一段）"
+  },
+  {
+   "used": false,
+   "orig": "沒用到",
+   "light": "it was absurd that my grandmother cooked so many dishes",
+   "high": "it was absurd to cook so many dishes that nobody could finish them"
+  },
+  {
+   "used": false,
+   "orig": "沒用到",
+   "light": "express their own thoughts without offending each other",
+   "high": "My words offended them"
+  },
+  {
+   "used": false,
+   "orig": "沒用到",
+   "light": "we will only pretend that nothing is wrong",
+   "high": "I pretended to be busy with my phone"
+  },
+  {
+   "used": false,
+   "orig": "沒用到",
+   "light": "avoid bias and further misunderstanding",
+   "high": "listening to their stories without bias"
+  },
+  {
+   "used": false,
+   "orig": "寫成 reduce generation gap（少了 the）",
+   "light": "narrow the generation gap",
+   "high": "the generation gap can be narrowed"
+  },
+  {
+   "used": false,
+   "orig": "沒用 Only when；寫了同一種倒裝 only if we see … can we avoid …，倒裝是對的",
+   "light": "only when we see things through each other's eyes can we avoid …（把你的 only if 換成 only when）",
+   "high": "Only when we talk openly and listen patiently can we break down the barriers between us"
+  },
+  {
+   "used": false,
+   "orig": "沒用到",
+   "light": "it is worth putting ourselves in each other's shoes",
+   "high": "It is worth listening to their stories"
+  }
+ ],
+ "versionsIntro": "左邊輕修版：照你原來的句子，把文法和搭配改對，八個建議用字都放進去。右邊高分版：同一頓團圓飯。第一段加了你發脾氣的那一刻和飯後的心情，第二段每個做法配一個例子，結尾回到明年的團圓飯。",
+ "light": {
+  "paras": [
+   "Last Lunar New Year, my family had a {{s:reunion}} at my grandmother's house. My grandmother prepared a feast for {{c:us}}, but I didn't eat {{c:much}} because I was on a diet. {{c:So}} my grandparents blamed me for wasting food. I {{c:told}} them that I was {{c:trying to keep}} in shape, {{c:but}} they didn't understand why young people care about their appearance so much, forcing me to finish {{c:the rest of the}} food. From my perspective, {{c:it was}} {{s:absurd}} {{c:that}} my grandmother cooked so many {{c:dishes when we obviously}} couldn't finish {{c:them}} all. As a result, {{c:my grandparents and I}} didn't talk {{c:to each other for the rest of the evening}}.",
+   "{{c:Conflicts like this are common, and}} there is growing concern about how to {{c:narrow}} {{s:the generation gap}}. I would argue that communicating more is the most {{c:effective}} way {{c:to do so}}. First, when {{c:a conflict occurs}} between {{c:the elderly and the young}}, it is crucial for both sides to express their own {{c:thoughts without}} {{s:offending}} {{c:each other}}. Otherwise, we will {{c:only}} {{s:pretend}} {{c:that nothing is wrong and}} never break down barriers. Second, {{s:it is worth putting}} ourselves in {{c:each other's}} shoes. It is a well-known fact that people {{c:who grow up}} in different {{c:generations}} and {{c:environments}} {{c:have}} great {{c:differences in values}} and habits. Hence, {{s:only when}} we see things through {{c:each other's}} eyes can we avoid {{s:bias}} {{c:and}} further misunderstanding. All in all, I {{c:believe}} that it is possible for young people and seniors to get along with each other, as long as we put {{c:these two ideas}} into practice."
+  ],
+  "note": "句子的順序和內容都照你的，改的是挑錯裡標出來的地方。有兩處換得比較多：第二段開頭照第 14 處換成 Conflicts like this are common，第一段最後一句照第 13 處寫出是誰、到什麼時候。為了放建議用字，加了 without offending each other、only pretend that nothing is wrong、bias and 這幾個字，也把 we should put 換成 it is worth putting、only if 換成 only when。"
+ },
+ "high": {
+  "paras": [
+   "Last Lunar New Year, my family gathered at my grandmother's house for a {{s:reunion}} dinner. She had prepared a {{w:feast}} for us, but I ate very little because I was on a diet. {{g:Seeing my bowl half full}}, my grandparents {{p:blamed me for}} wasting food. I explained that I was trying to {{p:keep in shape}}, yet they could not understand {{g:why young people care}} so much about their {{w:appearance}}. {{p:From my perspective}}, it was {{s:absurd}} to cook {{g:so many dishes that}} nobody could finish them. When my grandfather {{g:insisted that I finish}} {{p:the rest of}} the food, I {{p:lost my temper}} and called their ideas outdated. My words {{s:offended}} them, and an {{w:uneasy}} {{w:silence}} fell over the table. After that, I {{s:pretended}} to be busy with my phone, though deep down I felt {{w:guilty}}.",
+   "{{w:Conflicts}} like this are common, but {{s:the generation gap}} can be narrowed {{p:as long as}} both sides {{p:are willing to}} talk and listen. First, {{g:it is crucial for both sides to express}} their thoughts honestly. {{g:If I had told}} my grandmother about my diet {{w:beforehand}}, she {{g:would have cooked}} less. Second, we should {{p:put ourselves in each other's shoes}}. My grandparents {{p:grew up}} when food was {{w:scarce}}, so to them a full table is a way of showing love. {{s:It is worth listening}} to their stories without {{s:bias}}. {{s:Only when}} we talk openly and listen patiently can we {{p:break down the barriers}} between us. Next Lunar New Year, I will put both ideas into practice {{g:so that}} our {{s:reunion}} dinner can end in {{w:laughter}} {{p:instead of}} silence."
+  ],
+  "note": "故事和兩個做法都照你的。第一段多了衝突最僵的那一刻，最後補一句心情；第二段兩個做法各配一個例子，最後一句回到團圓飯。有幾處情節是我加的：碗裡還剩一半、爺爺堅持要你吃完、你發脾氣說他們的想法過時、之後假裝在滑手機、心裡過意不去、事先跟奶奶說在節食、爺爺奶奶小時候食物很少、明年過年的打算。這些是示範，請換成你自己的。"
+ },
+ "vocab": {
+  "words": [
+   {
+    "id": "core-2/reunion",
+    "form": "reunion",
+    "lib": {
+     "id": "core-2/reunion",
+     "kind": "word",
+     "word": "reunion",
+     "pos": "n.",
+     "level": 2,
+     "gsat": true,
+     "zh": "團聚、重聚；同學會",
+     "ex": "Our family holds a reunion at my grandmother's house every year.",
+     "exZh": "我們家每年都在奶奶家團聚。"
+    }
+   },
+   {
+    "id": "core-2/feast",
+    "form": "feast",
+    "lib": {
+     "id": "core-2/feast",
+     "kind": "word",
+     "word": "feast",
+     "pos": "n./v.",
+     "level": 2,
+     "gsat": true,
+     "zh": "盛宴、大餐；盡情享用",
+     "ex": "The whole family sat down to a big feast on New Year's Eve.",
+     "exZh": "全家人在除夕坐下來享用一頓豐盛的大餐。"
+    }
+   },
+   {
+    "id": "core-3/appearance",
+    "form": "appearance",
+    "lib": {
+     "id": "core-3/appearance",
+     "kind": "word",
+     "word": "appearance",
+     "pos": "n.",
+     "level": 3,
+     "gsat": true,
+     "zh": "外表、外貌；出現、露面",
+     "ex": "Don't judge a person only by his appearance.",
+     "exZh": "不要只憑外表去評斷一個人。"
+    }
+   },
+   {
+    "id": "core-3/absurd",
+    "form": "absurd",
+    "lib": {
+     "id": "core-3/absurd",
+     "kind": "word",
+     "word": "absurd",
+     "pos": "adj.",
+     "level": 3,
+     "gsat": true,
+     "zh": "荒謬的、可笑的",
+     "ex": "It is absurd to wear a heavy coat on such a hot day.",
+     "exZh": "這麼熱的天穿厚外套真是荒謬。"
+    }
+   },
+   {
+    "id": "core-5/uneasy",
+    "form": "uneasy",
+    "lib": {
+     "id": "core-5/uneasy",
+     "kind": "word",
+     "word": "uneasy",
+     "pos": "adj.",
+     "level": 5,
+     "gsat": true,
+     "zh": "不安的、擔心的",
+     "ex": "I felt uneasy when I heard strange noises outside.",
+     "exZh": "聽到外面有奇怪的聲音時，我感到很不安。"
+    }
+   },
+   {
+    "id": "core-2/silence",
+    "form": "silence",
+    "lib": {
+     "id": "core-2/silence",
+     "kind": "word",
+     "word": "silence",
+     "pos": "n./v.",
+     "level": 2,
+     "gsat": true,
+     "zh": "寂靜、沉默；使安靜",
+     "ex": "A long silence followed the teacher's question about the broken window.",
+     "exZh": "老師問起破掉的窗戶後，是一陣長長的沉默。"
+    }
+   },
+   {
+    "id": "core-2/pretend",
+    "form": "pretended",
+    "lib": {
+     "id": "core-2/pretend",
+     "kind": "word",
+     "word": "pretend",
+     "pos": "v.",
+     "level": 2,
+     "gsat": true,
+     "zh": "假裝",
+     "ex": "The children pretend to be animals in the garden.",
+     "exZh": "孩子們在花園裡假裝自己是動物。"
+    }
+   },
+   {
+    "id": "core-2/guilty",
+    "form": "guilty",
+    "lib": {
+     "id": "core-2/guilty",
+     "kind": "word",
+     "word": "guilty",
+     "pos": "adj.",
+     "level": 2,
+     "gsat": true,
+     "zh": "內疚的；有罪的",
+     "ex": "I felt guilty after I broke my friend's cup.",
+     "exZh": "我打破朋友的杯子後覺得很內疚。"
+    }
+   },
+   {
+    "id": "core-3/conflict",
+    "form": "Conflicts",
+    "lib": {
+     "id": "core-3/conflict",
+     "kind": "word",
+     "word": "conflict",
+     "pos": "n./v.",
+     "level": 3,
+     "gsat": true,
+     "zh": "衝突、矛盾；（時間、意見）相衝突",
+     "ex": "There was a conflict between the two friends about the game.",
+     "exZh": "那兩個朋友為了遊戲起了衝突。"
+    }
+   },
+   {
+    "id": "core-5/beforehand",
+    "form": "beforehand",
+    "lib": {
+     "id": "core-5/beforehand",
+     "kind": "word",
+     "word": "beforehand",
+     "pos": "adv.",
+     "level": 5,
+     "gsat": true,
+     "zh": "事先、預先",
+     "ex": "If you plan to visit the museum, buy your tickets beforehand.",
+     "exZh": "如果你打算去博物館，要事先買好票。"
+    }
+   },
+   {
+    "id": "core-3/scarce",
+    "form": "scarce",
+    "lib": {
+     "id": "core-3/scarce",
+     "kind": "word",
+     "word": "scarce",
+     "pos": "adj.",
+     "level": 3,
+     "gsat": true,
+     "zh": "稀少的、缺乏的",
+     "ex": "Fresh water is scarce in the dry parts of the world.",
+     "exZh": "在世界上乾燥的地區，淡水很稀少。"
+    }
+   },
+   {
+    "id": "core-2/bias",
+    "form": "bias",
+    "lib": {
+     "id": "core-2/bias",
+     "kind": "word",
+     "word": "bias",
+     "pos": "n.",
+     "level": 2,
+     "gsat": true,
+     "zh": "偏見、偏心",
+     "ex": "A good judge should not show bias toward either team.",
+     "exZh": "好的裁判不應該偏袒任何一隊。"
+    }
+   },
+   {
+    "id": "core-2/laughter",
+    "form": "laughter",
+    "lib": {
+     "id": "core-2/laughter",
+     "kind": "word",
+     "word": "laughter",
+     "pos": "n.",
+     "level": 2,
+     "gsat": true,
+     "zh": "笑聲",
+     "ex": "Laughter filled the classroom when the teacher told a funny story.",
+     "exZh": "老師講了一個好笑的故事，教室裡充滿了笑聲。"
+    }
+   }
+  ],
+  "phrases": [
+   {
+    "id": "phrases-common/blame-sb-for-sth",
+    "form": "blamed me for",
+    "lib": {
+     "id": "phrases-common/blame-sb-for-sth",
+     "kind": "phrase",
+     "phrase": "blame sb. for sth.",
+     "gsat": true,
+     "hard": false,
+     "zh": "為某事責怪某人",
+     "ex": "It is not wise to blame others for your own mistakes.",
+     "exZh": "因為自己犯的錯而責怪別人並不明智。",
+     "note": "也可用 blame sth. on sb.，介系詞不同",
+     "trap": "to blame others of"
+    }
+   },
+   {
+    "id": "phrases-textbook/keep-in-shape",
+    "form": "keep in shape",
+    "lib": {
+     "id": "phrases-textbook/keep-in-shape",
+     "kind": "phrase",
+     "phrase": "keep in shape",
+     "gsat": false,
+     "hard": false,
+     "zh": "保持身材；維持健康",
+     "ex": "",
+     "exZh": "",
+     "note": "",
+     "trap": ""
+    },
+    "note": "課本片語"
+   },
+   {
+    "id": "phrases-writing/from-my-perspective",
+    "form": "From my perspective",
+    "lib": {
+     "id": "phrases-writing/from-my-perspective",
+     "kind": "phrase",
+     "phrase": "from my perspective",
+     "gsat": true,
+     "hard": false,
+     "zh": "就我的觀點來看",
+     "ex": "From my perspective, a short walk after dinner does more good than watching television all evening.",
+     "exZh": "就我的觀點來看，晚餐後散個步，比整晚看電視更有益處。",
+     "note": "偏正式；perspective 是可數名詞，前面用 my",
+     "trap": "From my perspectives,"
+    }
+   },
+   {
+    "id": "phrases-common/the-rest-of",
+    "form": "the rest of",
+    "lib": {
+     "id": "phrases-common/the-rest-of",
+     "kind": "phrase",
+     "phrase": "the rest of",
+     "gsat": true,
+     "hard": false,
+     "zh": "其餘的；剩下的",
+     "ex": "He drank half of the juice and gave the rest of it to his sister.",
+     "exZh": "他喝了一半的果汁，把剩下的給了妹妹。",
+     "note": "動詞單複數依後面的名詞決定",
+     "trap": "and gave rest of it"
+    }
+   },
+   {
+    "id": "phrases-common/lose-ones-temper",
+    "form": "lost my temper",
+    "lib": {
+     "id": "phrases-common/lose-ones-temper",
+     "kind": "phrase",
+     "phrase": "lose one's temper",
+     "gsat": true,
+     "hard": false,
+     "zh": "發脾氣；動怒",
+     "ex": "The coach never loses his temper, even when the players make mistakes.",
+     "exZh": "即使球員犯錯，教練也從不發脾氣。",
+     "note": "one's 隨主詞變化；反義 keep one's temper",
+     "trap": "never loses his tempers,"
+    }
+   },
+   {
+    "id": "phrases-writing/the-generation-gap",
+    "form": "the generation gap",
+    "lib": {
+     "id": "phrases-writing/the-generation-gap",
+     "kind": "phrase",
+     "phrase": "the generation gap",
+     "gsat": true,
+     "hard": false,
+     "zh": "代溝",
+     "ex": "Talking openly is the best way to reduce the generation gap at home.",
+     "exZh": "坦誠溝通是縮小家中代溝的最好方法。",
+     "note": "固定用法，前面加 the；常搭配 bridge、narrow、reduce",
+     "trap": "the generations gap at home."
+    }
+   },
+   {
+    "id": "phrases-writing/as-long-as",
+    "form": "as long as",
+    "lib": {
+     "id": "phrases-writing/as-long-as",
+     "kind": "phrase",
+     "phrase": "as long as",
+     "gsat": true,
+     "hard": false,
+     "zh": "只要；只要……就",
+     "ex": "Students can improve their grades as long as they study a little every day.",
+     "exZh": "只要每天讀一點書，學生就能提升成績。",
+     "note": "引導條件子句，語氣比 if 強調「只要」；子句用現在式表未來",
+     "trap": "as long they study"
+    }
+   },
+   {
+    "id": "phrases-writing/be-willing-to-v",
+    "form": "are willing to",
+    "lib": {
+     "id": "phrases-writing/be-willing-to-v",
+     "kind": "phrase",
+     "phrase": "be willing to V",
+     "gsat": true,
+     "hard": false,
+     "zh": "願意",
+     "ex": "Many senior students are willing to tutor younger kids for free.",
+     "exZh": "許多高年級學生願意免費幫學弟妹補習。",
+     "note": "後接原形動詞；相反為 be unwilling to V",
+     "trap": "are willing of"
+    }
+   },
+   {
+    "id": "phrases-zh/put-oneself-in-sb-s-shoes",
+    "form": "put ourselves in each other's shoes",
+    "note": "oneself 隨主詞換成 ourselves，sb.'s 換成 each other's",
+    "lib": {
+     "id": "phrases-zh/put-oneself-in-sb-s-shoes",
+     "kind": "phrase",
+     "phrase": "put oneself in sb.'s shoes",
+     "gsat": true,
+     "hard": false,
+     "zh": "將心比心；設身處地",
+     "ex": "Before you blame him, try to put yourself in his shoes for a minute.",
+     "exZh": "在你責怪他之前，先將心比心，設身處地替他想一想。",
+     "note": "反身代名詞要隨主詞變化，如 put myself / himself",
+     "trap": "put yourself on his shoes"
+    }
+   },
+   {
+    "id": "phrases-common/grow-up",
+    "form": "grew up",
+    "lib": {
+     "id": "phrases-common/grow-up",
+     "kind": "phrase",
+     "phrase": "grow up",
+     "gsat": true,
+     "hard": false,
+     "zh": "長大；成長",
+     "ex": "Children grow up quickly, so enjoy every moment with them.",
+     "exZh": "孩子長得很快，所以要珍惜和他們相處的每一刻。",
+     "note": "不及物，不能用被動；grow up to be 表示長大後成為",
+     "trap": "grows up quickly,"
+    }
+   },
+   {
+    "id": "phrases-writing/it-is-worth-v-ing",
+    "form": "It is worth listening",
+    "lib": {
+     "id": "phrases-writing/it-is-worth-v-ing",
+     "kind": "phrase",
+     "phrase": "It is worth V-ing",
+     "gsat": true,
+     "hard": false,
+     "zh": "值得…",
+     "ex": "It is worth visiting the old market at least once during your stay.",
+     "exZh": "你停留期間，值得去逛逛那個老市場，至少去一次。",
+     "note": "worth 後接 V-ing，用主動形式表被動意義",
+     "trap": "It is worth to visit"
+    }
+   },
+   {
+    "id": "phrases-writing/only-when",
+    "form": "Only when",
+    "lib": {
+     "id": "phrases-writing/only-when",
+     "kind": "phrase",
+     "phrase": "Only when …",
+     "gsat": true,
+     "hard": true,
+     "zh": "只有當…才…",
+     "ex": "Only when we lose something do we realize how valuable it was.",
+     "exZh": "只有在失去某樣東西時，我們才明白它有多珍貴。",
+     "note": "放句首時，主要子句的助動詞與主詞要倒裝",
+     "trap": "Only when do we lose something"
+    }
+   },
+   {
+    "id": "phrases-writing/break-down-barriers",
+    "form": "break down the barriers",
+    "lib": {
+     "id": "phrases-writing/break-down-barriers",
+     "kind": "phrase",
+     "phrase": "break down barriers",
+     "gsat": true,
+     "hard": false,
+     "zh": "打破隔閡；消除障礙",
+     "ex": "Learning a second language can help break down barriers between people from different cultures.",
+     "exZh": "學第二外語有助於打破不同文化的人之間的隔閡。",
+     "note": "這裡 break down 是及物「拆除」；常接 between A and B",
+     "trap": "break out barriers"
+    }
+   },
+   {
+    "id": "phrases-common/instead-of",
+    "form": "instead of",
+    "lib": {
+     "id": "phrases-common/instead-of",
+     "kind": "phrase",
+     "phrase": "instead of",
+     "gsat": true,
+     "hard": false,
+     "zh": "而不是；代替",
+     "ex": "Why not walk to school instead of taking the bus every morning?",
+     "exZh": "每天早上何不走路上學，而不是搭公車呢？",
+     "note": "of 後接名詞或 V-ing；單獨的 instead 是副詞",
+     "trap": "instead of take the bus"
+    }
+   }
+  ]
+ },
+ "patterns": [
+  {
+   "name": "分詞構句",
+   "formula": "V-ing …, S + V",
+   "ex": "Seeing my bowl half full, my grandparents blamed me for wasting food.",
+   "why": "「看到」和「責怪」都是 my grandparents 做的，前一個動作改成 V-ing 放句首。你原文句尾的 forcing me to … 是同一種寫法，寫對了。要留意逗號後面的主詞，得是做 V-ing 那個動作的人。"
+  },
+  {
+   "name": "間接問句",
+   "formula": "S + V + why / how / what + S + V",
+   "ex": "I explained that I was trying to keep in shape, yet they could not understand why young people care so much about their appearance.",
+   "why": "why 後面照直述句的順序寫（young people care），不寫 why do young people care。這一段你原文就寫對了。前半句改了三個地方：have told 換成過去式的 explained（第 5 處），keeping 改成 trying to keep（第 6 處），and 換成 yet（第 7 處）。"
+  },
+  {
+   "name": "so … that",
+   "formula": "so + many / much + 名詞 + that + 子句",
+   "ex": "From my perspective, it was absurd to cook so many dishes that nobody could finish them.",
+   "why": "你原文寫 cooked so many obviously we couldn't finish all：many 後面少了名詞（第 10 處），兩個句子中間沒有連接詞（第 11 處），all 前面少了 them（第 12 處）。用 so many dishes that … 一句就接起來了。"
+  },
+  {
+   "name": "insist that",
+   "formula": "insist + that + S + (should) + 原形動詞",
+   "ex": "When my grandfather insisted that I finish the rest of the food, I lost my temper and called their ideas outdated.",
+   "why": "insist 後面的子句省略了 should，動詞用原形，所以是 I finish，雖然整句在講過去的事，也不寫 finished。the rest of the food 是第 8 處的改法。"
+  },
+  {
+   "name": "It is … for sb. to V",
+   "formula": "It is + 形容詞 + for + 人 + to + 原形動詞",
+   "ex": "First, it is crucial for both sides to express their thoughts honestly.",
+   "why": "這一句你原文就寫對了（第 22 處），照著留。只有 thought 改成複數 thoughts（第 23 處）。"
+  },
+  {
+   "name": "與過去事實相反的假設",
+   "formula": "If + S + had + 過去分詞, S + would have + 過去分詞",
+   "ex": "If I had told my grandmother about my diet beforehand, she would have cooked less.",
+   "why": "講一件當時沒做的事。if 那一邊用 had told，另一邊用 would have cooked，兩邊不要對調。第二段的做法要配例子的時候，回頭拿第一段的事來假設，就可以用這一句。"
+  },
+  {
+   "name": "It is worth V-ing",
+   "formula": "It is worth + V-ing",
+   "ex": "It is worth listening to their stories without bias.",
+   "why": "worth 後面接 V-ing，不接 to V，常見的錯是 It is worth to listen。這是建議用字，你原文沒用到。"
+  },
+  {
+   "name": "Only when 放句首的倒裝",
+   "formula": "Only when + S + V + 助動詞 + S + 原形動詞",
+   "ex": "Only when we talk openly and listen patiently can we break down the barriers between us.",
+   "why": "你原文的 only if we see … can we avoid（第 31 處）倒裝寫對了，這裡換成建議用字 Only when。倒裝的是後半句（can we），when 那半句照平常的順序。break down the barriers 也是你原文的（第 24 處）。"
+  },
+  {
+   "name": "so that（目的）",
+   "formula": "S + V + so that + S + can / will + 原形動詞",
+   "ex": "Next Lunar New Year, I will put both ideas into practice so that our reunion dinner can end in laughter instead of silence.",
+   "why": "so that 連在一起，後面說目的，動詞前面通常有 can 或 will。跟上面分開寫的 so … that（說結果）不一樣。put … into practice 是你原文結尾的片語，what I said above 換成 both ideas（第 33 處）。"
+  }
+ ],
+ "templates": [
+  {
+   "use": "第一段開頭：交代時間、地點、場合",
+   "sent": "Last ___, my family gathered at ___ for a ___.",
+   "note": "時間可以換 Mid-Autumn Festival、summer；地點換 my uncle's house、a restaurant；場合換 reunion dinner、birthday party（前面已經有 a，不要再寫一次）。"
+  },
+  {
+   "use": "第一段：說自己當時的看法",
+   "sent": "From my perspective, it was absurd to ___.",
+   "note": "空格放原形動詞開頭的一段，例如 wake up at five on a holiday。absurd 可以換 unfair、unreasonable。"
+  },
+  {
+   "use": "第一段：衝突最僵的那一刻",
+   "sent": "When ___ insisted that I ___, I lost my temper and ___.",
+   "note": "insisted that I 後面的動詞用原形（give up、go home）。最後一格寫你說了什麼或做了什麼，用過去式。"
+  },
+  {
+   "use": "第一段結尾：事後的心情",
+   "sent": "After that, I pretended to ___, though deep down I felt ___.",
+   "note": "pretended to 後面接原形（be asleep、be busy）；「假裝不在乎」是 pretended not to care。心情可以換 guilty、sorry、hurt。"
+  },
+  {
+   "use": "第二段開頭：接回第一段，帶出主張",
+   "sent": "Conflicts like this are common, but ___ can be ___ as long as both sides are willing to ___.",
+   "note": "例如 the generation gap can be narrowed、misunderstandings can be avoided。最後一格放原形動詞，最好能包住後面要講的兩個做法。"
+  },
+  {
+   "use": "第二段：給做法配一個例子",
+   "sent": "If I had ___ beforehand, ___ would have ___.",
+   "note": "had 和 would have 後面都接過去分詞（had asked、would have understood）。寫第一段裡當時沒做的那件事。"
+  },
+  {
+   "use": "第二段：收攏兩個做法",
+   "sent": "Only when we ___ can we ___.",
+   "note": "前一格放現在式動詞（listen to each other），後一格放原形（narrow the generation gap、avoid misunderstandings）。can we 的順序不要寫回 we can。"
+  },
+  {
+   "use": "結尾：回到第一段的場景",
+   "sent": "Next ___, I will ___ so that our ___ can end in laughter instead of ___.",
+   "note": "第一格換成第一段的時間，第三格換成第一段的場合。最後一格放第一段結束時的樣子，例如 silence、tears、an argument。"
+  }
+ ],
+ "basis": {
+  "appRubric": [
+   "內容（5 分）：第一段具體描述一次世代間的誤會或衝突（起因、雙方反應、後來的體會），第二段提出縮小代溝的方法並說明理由。",
+   "組織（5 分）：兩段分工清楚，各有主題句，用 when、so、since 等連接詞串起前後。",
+   "文法句構（4 分）：時態正確（經驗用過去式、看法用現在式），能用 Only when … can …、It is worth V-ing 等句型。",
+   "字彙拼字（4 分）：能用 reunion、absurd、offend、bias、the generation gap 等本回字詞，用字精確、拼字正確。",
+   "格式與字數（2 分）：分兩段、段首縮排或空行，至少 120 個單詞。"
+  ],
+  "criteriaTitle": "大考中心怎麼給分",
+  "criteriaIntro": "照 115 學測英文考科〈非選擇題滿分參考答案與評分原則〉的表一。115 年的表沒有標每級幾分，分數（5-4、3、2-1、0）取自 113、114 學測的評分原則與 115 學年度起適用的考試說明。",
+  "criteria": [
+   {
+    "k": "內容",
+    "max": 5,
+    "d": "內容是否切題",
+    "levels": [
+     {
+      "pts": "優（5-4 分）",
+      "d": "主題(句)清楚切題，並有具體、完整的相關細節支持。"
+     },
+     {
+      "pts": "可（3 分）",
+      "d": "主題不夠清楚或突顯，部分相關敘述發展不全。"
+     },
+     {
+      "pts": "差（2-1 分）",
+      "d": "主題不明，大部分相關敘述發展不全或與主題無關。"
+     },
+     {
+      "pts": "劣（0 分）",
+      "d": "幾乎沒有內容或文意難辨。"
+     }
+    ]
+   },
+   {
+    "k": "組織",
+    "max": 5,
+    "d": "組織是否具連貫性",
+    "levels": [
+     {
+      "pts": "優（5-4 分）",
+      "d": "重點分明，有開頭、發展、結尾，前後連貫，轉承語使用得當。"
+     },
+     {
+      "pts": "可（3 分）",
+      "d": "重點安排不妥，前後發展比例與轉承語使用欠妥。"
+     },
+     {
+      "pts": "差（2-1 分）",
+      "d": "重點不明、前後連貫性差。"
+     },
+     {
+      "pts": "劣（0 分）",
+      "d": "毫無重點、前後不連貫。"
+     }
+    ]
+   },
+   {
+    "k": "文法句構",
+    "max": 5,
+    "d": "句子結構與文法",
+    "levels": [
+     {
+      "pts": "優（5-4 分）",
+      "d": "文法、格式、標點幾乎無誤，文句結構富變化。"
+     },
+     {
+      "pts": "可（3 分）",
+      "d": "文法、格式、標點偶有錯誤，但不影響文意表達。"
+     },
+     {
+      "pts": "差（2-1 分）",
+      "d": "文法、格式、標點錯誤多，明顯影響文意表達。"
+     },
+     {
+      "pts": "劣（0 分）",
+      "d": "文法、格式、標點幾乎全錯，嚴重影響文意表達。"
+     }
+    ]
+   },
+   {
+    "k": "字彙拼字",
+    "max": 5,
+    "d": "用字是否適切表達文意，及拼字與標點符號使用是否正確",
+    "levels": [
+     {
+      "pts": "優（5-4 分）",
+      "d": "用字精確、得宜，拼字、大小寫幾乎無誤。"
+     },
+     {
+      "pts": "可（3 分）",
+      "d": "字詞單調、重複，用字偶有不當，拼字、大小寫偶有錯誤，但不影響文意表達。"
+     },
+     {
+      "pts": "差（2-1 分）",
+      "d": "用字、拼字、大小寫錯誤多，明顯影響文意表達。"
+     },
+     {
+      "pts": "劣（0 分）",
+      "d": "用字、拼字幾乎全錯，嚴重影響文意表達。"
+     }
+    ]
+   }
+  ],
+  "extra": [
+   {
+    "h": "整體分數怎麼算",
+    "items": [
+     "英文作文依考生在內容、組織、文法句構、字彙拼字之表現評分，各項得分加總後給予一個整體分數（holistic score）。",
+     "每項 5 分，合計 20 分。",
+     "113、114 學測的評分原則另外寫了五等級：特優（19-20 分）、優（15-18 分）、可（10-14 分）、差（5-9 分）、劣（0-4 分）。115 年的文件沒有這一句。"
+    ]
+   },
+   {
+    "h": "扣分與 0 分",
+    "items": [
+     "字數明顯不足者，扣總分 1 分；未分段者，亦扣總分 1 分。",
+     "寫多段，不扣分。字數明顯不足且未分段，不重複扣分。",
+     "0 分的情況：空白、完全文不對題或離題、完全抄襲選文、文句完全錯誤或文字不足成句。"
+    ]
+   },
+   {
+    "h": "評分重點",
+    "items": [
+     "英文作文評分重點在於內容須符合題目要求，提供充分、具體之細節，句構語法及用字適切，拼字與標點符號使用得當；內容充實以及語言表達得宜，應是考生得分之重要元素。"
+    ]
+   }
+  ],
+  "sources": [
+   {
+    "t": "大考中心：115學年度學科能力測驗英文考科非選擇題滿分參考答案與評分原則（PDF）",
+    "u": "https://www.ceec.edu.tw/files/file_pool/1/0q054335046832331817/115%E5%AD%B8%E6%B8%AC%E8%8B%B1%E6%96%87%E8%80%83%E7%A7%91%E9%9D%9E%E9%81%B8%E6%93%87%E9%A1%8C%E5%8F%83%E8%80%83%E7%AD%94%E6%A1%88%E8%88%87%E8%A9%95%E5%88%86%E5%8E%9F%E5%89%87.pdf",
+    "note": "第 1 頁評分重點、第 2 頁評分原則與扣分、第 3 頁表一與 0 分條件（已下載，抽出文字逐字核對）"
+   },
+   {
+    "t": "大考中心選才電子報第 351 期：115學年度學科能力測驗非選擇題評分原則說明－【英文】（林秀慧，115-04-15 發布、115-04-29 更新）",
+    "u": "https://www.ceec.edu.tw/xcepaper/cont?xsmsid=0J066588036013658199&qperoid=0Q105359543716106563&sid=0Q111569514236767793",
+    "note": "英文作文「評分原則與說明」、表一、扣分規定、考生作答淺析；表一文字與上面 PDF 相同"
+   },
+   {
+    "t": "大考中心：學科能力測驗英文考科考試說明（115 學年度起適用，中華民國 113 年 7 月，PDF）",
+    "u": "https://www.ceec.edu.tw/files/file_pool/1/0O211559263171214197/01_115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E8%B5%B7%E9%81%A9%E7%94%A8%E5%AD%B8%E6%B8%AC%E8%8B%B1%E6%96%87%E8%80%83%E7%A7%91%E8%80%83%E8%A9%A6%E8%AA%AA%E6%98%8E.pdf",
+    "note": "「二、英文作文」的測驗目標、作答說明，以及附 5-4、3、2-1、0 分的分項式評分標準（印頁碼約 25 至 26 頁，已下載）"
+   },
+   {
+    "t": "大考中心：114學年度學科能力測驗英文考科非選擇題參考答案與評分原則（PDF）",
+    "u": "https://www.ceec.edu.tw/files/file_pool/1/0p055378620142741052/03-114%E5%AD%B8%E6%B8%AC%E8%8B%B1%E6%96%87%E8%80%83%E7%A7%91%E9%9D%9E%E9%81%B8%E6%93%87%E9%A1%8C%E5%8F%83%E8%80%83%E7%AD%94%E6%A1%88%E8%88%87%E8%A9%95%E5%88%86%E5%8E%9F%E5%89%87.pdf",
+    "note": "第 2 至 3 頁：五等級（特優 19-20 至劣 0-4）與表一各格分數（已下載）"
+   }
+  ]
+ }
+}

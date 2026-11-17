@@ -1,0 +1,44 @@
+{
+ "version": 1,
+ "note": "三個等級：步驟、檢查、輸出格式完全一樣，只差每一步用哪個模型與思考強度。想改就直接改這份。model 寫 haiku／sonnet／opus／fable（Claude Code 子代理的模型名稱）；effort 是 null 就照預設。fallback：那個模型用不了（例如訂閱沒有 Fable）就改用它。不是 Claude Code（Codex、Gemini CLI 等）就全部跟著當下的模型。",
+ "default": "usual",
+ "tiers": {
+  "usual": {
+   "zh": "省錢",
+   "desc": "收集資料與盲審用 Haiku，診斷與改寫用 Sonnet。作者平常用這一級。",
+   "main": {"model": "sonnet", "effort": null, "note": "主線（你正在對話的這個）用 Sonnet 或 Opus 都可以"},
+   "steps": {
+    "collect":  {"agent": "essay-collector", "model": "haiku",  "effort": null},
+    "diagnose": {"agent": "essay-diagnoser", "model": "sonnet", "effort": null},
+    "rewrite":  {"agent": "essay-rewriter",  "model": "sonnet", "effort": null},
+    "review":   {"agent": "essay-reviewer",  "model": "haiku",  "effort": null}
+   },
+   "estUSD": {"en": 2.7, "zh": [3.1, 3.5]}
+  },
+  "best": {
+   "zh": "最好",
+   "desc": "診斷、改寫、修稿用 Fable（high），收集用 Sonnet（high），盲審用 Opus（high）。沒有 Fable 就用 Opus。",
+   "main": {"model": "fable", "effort": "high", "fallback": "opus", "note": "主線也建議換成 Fable（/model）"},
+   "steps": {
+    "collect":  {"agent": "essay-collector", "model": "sonnet", "effort": "high"},
+    "diagnose": {"agent": "essay-diagnoser", "model": "fable",  "effort": "high", "fallback": "opus"},
+    "rewrite":  {"agent": "essay-rewriter",  "model": "fable",  "effort": "high", "fallback": "opus"},
+    "review":   {"agent": "essay-reviewer",  "model": "opus",   "effort": "high"}
+   },
+   "estUSD": {"en": [9.0, 10.5], "zh": [10.6, 16.0]}
+  },
+  "test": {
+   "zh": "測試（全 Haiku）",
+   "desc": "每一步都用 Haiku，拿來試流程、試版面。批改品質會明顯差一些，不要拿給學生看。",
+   "main": {"model": "haiku", "effort": null, "note": "主線也可以換成 Haiku（/model haiku）"},
+   "steps": {
+    "collect":  {"agent": "essay-collector", "model": "haiku", "effort": null},
+    "diagnose": {"agent": "essay-diagnoser", "model": "haiku", "effort": null},
+    "rewrite":  {"agent": "essay-rewriter",  "model": "haiku", "effort": null},
+    "review":   {"agent": "essay-reviewer",  "model": "haiku", "effort": null}
+   },
+   "estUSD": {"en": 0.3, "zh": [0.4, 0.6], "note": "粗估，還沒實跑"}
+  }
+ },
+ "estimateNote": "estUSD 是照 API 牌價換算的一篇花費（作者 2026-11 實跑的 token 量）。用 Claude 訂閱（Pro／Max）跑的話不另外收錢，算在用量額度裡。"
+}
