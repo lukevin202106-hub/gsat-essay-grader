@@ -397,6 +397,13 @@ mark.on { outline: 2px solid currentColor; outline-offset: 2px; }
 .tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
 footer.foot { text-align: center; font-size: 13px; color: var(--ink2); padding: 28px var(--page) 0; line-height: 1.7; }
+/* 頁尾的 allinone 小廣告 */
+.promo { position: relative; max-width: 560px; margin: 18px auto 0; padding: 14px 16px 14px; border-radius: var(--r-card); background: var(--fill); border: 1px solid var(--rim); font-size: 14px; line-height: 1.7; color: var(--ink2); display: grid; gap: 8px; }
+.promo .promo-tag { position: absolute; top: 10px; right: 12px; font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 0 7px; line-height: 1.6; }
+.promo p { padding-right: 44px; }
+.promo b { display: block; color: var(--ink); font-size: 15px; margin-bottom: 2px; }
+.promo a { justify-self: start; display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 18px; background: var(--fill-on); border: 1px solid var(--rim); color: var(--ink); font-weight: 600; text-decoration: none; }
+@media print { .promo { display: none; } }
 
 /* ── 寬螢幕：眉批放到右邊欄 ── */
 @media (min-width: 940px) {

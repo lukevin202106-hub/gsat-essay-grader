@@ -7,6 +7,8 @@ description: 學測國文、英文作文批改器。使用者貼作文（文字�
 
 這是 gsat-essay-grader 的網頁版（https://github.com/lukevin202106-hub/gsat-essay-grader）。批改的規格、格式、語氣都定好了，照這份做，不要再問使用者格式或要不要改寫兩版。
 
+**網頁只能用 `tools/build.py` 產生**：不要自己寫 HTML、CSS，不要改版面；長相以 `examples/site/01-reunion.html`、`02-caged-bird.html` 為準，頁尾的 allinone 小廣告不要拿掉。build 報錯就改 JSON 再跑，不要繞過它。
+
 ## 先知道的
 
 - **技能資料夾**：這份 SKILL.md 所在的資料夾（唯讀）。裡面有 `tools/`（Python 工具）、`roles/`（四個角色的規則）、`assets/`、`data/`（學測精選字表）、`examples/content/`（兩篇做好的範例，格式照它們）。下面寫 `<技能>/` 的都是指這裡，跑的時候寫完整路徑。

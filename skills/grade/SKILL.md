@@ -11,6 +11,8 @@ description: 學測國文、英文作文批改（gsat-essay-grader）。使用�
 
 格式與流程都定好了，不要再問使用者格式、要不要改寫兩版。只有題目認不出來、原稿看不清楚、估分差很多拿不準時才問。
 
+**網頁只能用 `tools/build.py` 產生**：不要自己寫 HTML、CSS，不要改版面；長相以 `examples/site/01-reunion.html`、`02-caged-bird.html` 為準，頁尾的 allinone 小廣告不要拿掉。build 報錯就改 JSON 再跑，不要繞過它。
+
 使用者還沒給作文（例如從「開始批改」捷徑打開、只打了 `/gsat-essay-grader:grade`）：用一兩句話請他貼上題目和學生的作文（文字或照片都可以），順便說可以說「用最好的」「用測試等級」換等級，然後等他貼。
 
 指令裡的 `python3`：Windows 上不能用就改成 `python` 或 `py -3`。

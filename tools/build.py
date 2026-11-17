@@ -143,6 +143,18 @@ def shell(title, desc, body, en=False, wide=False):
 """
 
 
+APP_URL = "https://allinone-ai.lukevin202106.workers.dev/"
+
+
+def promo(subject):
+    """頁尾的 allinone 小廣告（作者要的，不要拿掉）"""
+    line = "學測英文要背的字、國文閱讀、數學動畫筆記，每天要做多少 App 幫你排好。學測精選 3,000 字免費"
+    line += "，這頁標 ★ 的字都在裡面。" if subject == "en" else "。"
+    return (f'<aside class="promo" aria-label="廣告"><span class="promo-tag">廣告</span>'
+            f'<p><b>allinone 讀書計畫</b>{line}</p>'
+            f'<a href="{APP_URL}" target="_blank" rel="noopener">看 allinone 官網</a></aside>')
+
+
 # ───────────────────────── 國文 ─────────────────────────
 
 def part_count(part):
@@ -344,6 +356,7 @@ def essay_page(e):
 {vjoin}
 {basis}
 <footer class="foot">{esc(e['reviewed'])}改。分數是照大考中心的評分表抓的，不是正式成績。<br>用 gsat-essay-grader 批改。</footer>
+{promo('zh')}
 </div>"""
     tabs_zh = "、".join(v["tab"] for v in e["versions"])
     return shell(f"{e['title']}｜作文批改", f"{e['origin']}「{e['title']}」的眉批、估分，和{tabs_zh}兩篇改寫。", body, wide=True)
@@ -605,6 +618,7 @@ def english_page(e):
 {panel("words", words)}
 {panel("basis", basis)}
 <footer class="foot">{esc(e['reviewed'])}改。估分照大考中心英文作文的四項（內容、組織、文法句構、字彙拼字，各 5 分）抓的，不是正式成績，實際閱卷會差 1～2 分。<br>精選字、片語的中文與例句取自 allinone 學測精選（CC BY-NC 4.0）。用 gsat-essay-grader 批改。</footer>
+{promo('en')}
 </div>"""
     return shell(f"{e['title']}｜作文批改", f"{e['origin']}「{e['title']}」的估分、逐句挑錯，和輕修版、高分版兩篇改寫。", body, en=True, wide=True)
 

@@ -411,6 +411,13 @@ mark.on { outline: 2px solid currentColor; outline-offset: 2px; }
 .tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
 footer.foot { text-align: center; font-size: 13px; color: var(--ink2); padding: 28px var(--page) 0; line-height: 1.7; }
+/* 頁尾的 allinone 小廣告 */
+.promo { position: relative; max-width: 560px; margin: 18px auto 0; padding: 14px 16px 14px; border-radius: var(--r-card); background: var(--fill); border: 1px solid var(--rim); font-size: 14px; line-height: 1.7; color: var(--ink2); display: grid; gap: 8px; }
+.promo .promo-tag { position: absolute; top: 10px; right: 12px; font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 0 7px; line-height: 1.6; }
+.promo p { padding-right: 44px; }
+.promo b { display: block; color: var(--ink); font-size: 15px; margin-bottom: 2px; }
+.promo a { justify-self: start; display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 18px; background: var(--fill-on); border: 1px solid var(--rim); color: var(--ink); font-weight: 600; text-decoration: none; }
+@media print { .promo { display: none; } }
 
 /* ── 寬螢幕：眉批放到右邊欄 ── */
 @media (min-width: 940px) {
@@ -918,6 +925,7 @@ details.box summary span { font-weight: 400; font-size: 14px; color: var(--muted
   <ul class="srcs"><li><a href="https://www.ceec.edu.tw/files/file_pool/1/0q054335046832331817/115%E5%AD%B8%E6%B8%AC%E8%8B%B1%E6%96%87%E8%80%83%E7%A7%91%E9%9D%9E%E9%81%B8%E6%93%87%E9%A1%8C%E5%8F%83%E8%80%83%E7%AD%94%E6%A1%88%E8%88%87%E8%A9%95%E5%88%86%E5%8E%9F%E5%89%87.pdf" target="_blank" rel="noopener noreferrer">大考中心：115學年度學科能力測驗英文考科非選擇題滿分參考答案與評分原則（PDF）</a><small>第 1 頁評分重點、第 2 頁評分原則與扣分、第 3 頁表一與 0 分條件（已下載，抽出文字逐字核對）</small></li><li><a href="https://www.ceec.edu.tw/xcepaper/cont?xsmsid=0J066588036013658199&amp;qperoid=0Q105359543716106563&amp;sid=0Q111569514236767793" target="_blank" rel="noopener noreferrer">大考中心選才電子報第 351 期：115學年度學科能力測驗非選擇題評分原則說明－【英文】（林秀慧，115-04-15 發布、115-04-29 更新）</a><small>英文作文「評分原則與說明」、表一、扣分規定、考生作答淺析；表一文字與上面 PDF 相同</small></li><li><a href="https://www.ceec.edu.tw/files/file_pool/1/0O211559263171214197/01_115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E8%B5%B7%E9%81%A9%E7%94%A8%E5%AD%B8%E6%B8%AC%E8%8B%B1%E6%96%87%E8%80%83%E7%A7%91%E8%80%83%E8%A9%A6%E8%AA%AA%E6%98%8E.pdf" target="_blank" rel="noopener noreferrer">大考中心：學科能力測驗英文考科考試說明（115 學年度起適用，中華民國 113 年 7 月，PDF）</a><small>「二、英文作文」的測驗目標、作答說明，以及附 5-4、3、2-1、0 分的分項式評分標準（印頁碼約 25 至 26 頁，已下載）</small></li><li><a href="https://www.ceec.edu.tw/files/file_pool/1/0p055378620142741052/03-114%E5%AD%B8%E6%B8%AC%E8%8B%B1%E6%96%87%E8%80%83%E7%A7%91%E9%9D%9E%E9%81%B8%E6%93%87%E9%A1%8C%E5%8F%83%E8%80%83%E7%AD%94%E6%A1%88%E8%88%87%E8%A9%95%E5%88%86%E5%8E%9F%E5%89%87.pdf" target="_blank" rel="noopener noreferrer">大考中心：114學年度學科能力測驗英文考科非選擇題參考答案與評分原則（PDF）</a><small>第 2 至 3 頁：五等級（特優 19-20 至劣 0-4）與表一各格分數（已下載）</small></li></ul>
 </article></section>
 <footer class="foot">2026 年 11 月 17 日改。估分照大考中心英文作文的四項（內容、組織、文法句構、字彙拼字，各 5 分）抓的，不是正式成績，實際閱卷會差 1～2 分。<br>精選字、片語的中文與例句取自 allinone 學測精選（CC BY-NC 4.0）。用 gsat-essay-grader 批改。</footer>
+<aside class="promo" aria-label="廣告"><span class="promo-tag">廣告</span><p><b>allinone 讀書計畫</b>學測英文要背的字、國文閱讀、數學動畫筆記，每天要做多少 App 幫你排好。學測精選 3,000 字免費，這頁標 ★ 的字都在裡面。</p><a href="https://allinone-ai.lukevin202106.workers.dev/" target="_blank" rel="noopener">看 allinone 官網</a></aside>
 </div>
 </main>
 <script>

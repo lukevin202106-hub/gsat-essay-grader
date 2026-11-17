@@ -56,6 +56,8 @@ def skill_zip():
         add_file(z, base + "data/LICENSE.md", ROOT / "data" / "LICENSE.md")
         for p in sorted((ROOT / "examples" / "content").glob("*.json")):
             add_file(z, base + "examples/content/" + p.name, p)
+        for p in sorted((ROOT / "examples" / "site").glob("*.html")):
+            add_file(z, base + "examples/site/" + p.name, p)      # 網頁長相的標準
         add_file(z, base + "LICENSE", ROOT / "LICENSE")
     return out
 

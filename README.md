@@ -69,7 +69,7 @@
 
 ## 其他 AI 工具
 
-Codex、Gemini CLI 這類工具沒有實測過。流程寫在 `skills/grade/SKILL.md`、各角色寫在 `agents/`，讓它讀 [AGENTS.md](AGENTS.md) 照著做，不能開子代理就照順序自己做每一個角色。
+Codex、Gemini 這類工具沒有實測過。流程寫在 `skills/grade/SKILL.md`、各角色寫在 `agents/`，讓它讀 [AGENTS.md](AGENTS.md)（Gemini 會讀 [GEMINI.md](GEMINI.md)）照著做，不能開子代理就照順序自己做每一個角色。網頁一定要用 `tools/build.py` 產生，才會跟範例長得一樣。
 
 ## 學測精選字表
 
