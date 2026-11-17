@@ -18,6 +18,12 @@ import sys
 from functools import lru_cache
 from pathlib import Path
 
+for _s in (sys.stdout, sys.stderr):      # Windows 的中文命令列是 Big5，印 ✗ 這類字會當掉；一律用 UTF-8
+    try:
+        _s.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 DATA = Path(os.environ.get("ESSAY_VOCAB") or Path(__file__).resolve().parent.parent / "data" / "gsat-vocab.json")
 VOWELS = "aeiou"
 TOKEN = re.compile(r"[A-Za-z]+(?:['’][A-Za-z]+)?(?:-[A-Za-z]+(?:['’][A-Za-z]+)?)*")

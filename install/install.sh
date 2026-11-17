@@ -22,7 +22,7 @@ fail() {
   printf '\n\033[31m%s\033[0m\n' "$1"
   printf '\n可以把這個視窗的文字截圖，到 https://github.com/lukevin202106-hub/gsat-essay-grader/issues 回報。\n'
   printf '按 Enter 關閉…'
-  read -r _ </dev/tty 2>/dev/null || true
+  { read -r _ </dev/tty; } 2>/dev/null || true
   exit 1
 }
 
@@ -59,7 +59,7 @@ if [ -z "$PY" ]; then
   echo "裝好之後，再雙擊一次「安裝作文批改器」，或再貼一次剛剛那行指令。"
   /usr/bin/xcode-select --install >/dev/null 2>&1 || true
   printf '\n按 Enter 關閉…'
-  read -r _ </dev/tty 2>/dev/null || true
+  { read -r _ </dev/tty; } 2>/dev/null || true
   exit 0
 fi
 echo "Python：$("$PY" --version 2>&1)"
@@ -113,7 +113,7 @@ bold "裝好了"
 echo "「文件」裡多了一個「作文批改」資料夾。以後雙擊裡面的「開始批改」就能批改作文。"
 [ -n "${GSAT_ESSAY_TEST:-}" ] || open "$WORK_DIR" 2>/dev/null || true
 printf '\n要現在開始嗎？第一次會請你登入 Claude。（Y＝開始，其他鍵＝之後再說）'
-if read -r ans </dev/tty 2>/dev/null; then
+if { read -r ans </dev/tty; } 2>/dev/null; then
   case "$ans" in
     [Yy]*|"") cd "$WORK_DIR" && exec claude "/gsat-essay-grader:grade" ;;
   esac

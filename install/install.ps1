@@ -39,7 +39,9 @@ if (Get-Command claude -ErrorAction SilentlyContinue) {
   Bold "1/4 Claude Code 已經裝好了"
 } else {
   Bold "1/4 安裝 Claude Code（Anthropic 官方安裝程式）…"
-  try { Invoke-RestMethod https://claude.ai/install.ps1 | Invoke-Expression } catch { Fail "Claude Code 安裝失敗：$($_.Exception.Message)" }
+  # 官方安裝程式放在另一個 PowerShell 裡跑，它結束時不會連這個視窗一起關掉
+  powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://claude.ai/install.ps1 | iex"
+  if ($LASTEXITCODE -ne 0) { Fail "Claude Code 安裝失敗。請檢查網路，再試一次。" }
   Refresh-Path
   if (-not (Get-Command claude -ErrorAction SilentlyContinue)) { Fail "找不到 claude 指令。請關掉這個視窗，再雙擊一次 install.bat。" }
 }
