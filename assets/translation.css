@@ -1,0 +1,18 @@
+/* gsat-essay-grader：中譯英分頁的樣式（只有批改檔有 translation 時才包進頁面，沒有翻譯的頁面跟以前一模一樣） */
+.tr-head .big .gold-num { font-size: 56px; }
+.tr-item { display: grid; gap: 12px; }
+.tr-item .tr-score b { font: 700 26px/1 var(--num); color: var(--gold); font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
+.tr-zh { font-size: 17px; line-height: 1.8; color: var(--ink); }
+.sheet.tr-s p, .sheet.tr-v p { text-indent: 0; }
+.tr-vers { display: grid; gap: 14px; }
+.tr-ver { min-width: 0; }
+.tr-ver .vhead h3 { font-size: 16px; }
+.ecard .ded { margin-left: auto; font: 700 13px/1 var(--num); color: var(--red); font-variant-numeric: lining-nums; }
+/* 「批改」分頁的篩選鈕（大錯／小改／加分）不影響中譯英的挑錯卡 */
+.tr-item .ecard[hidden] { display: grid; }
+/* 「改寫」分頁的標記開關不影響中譯英的三種寫法 */
+body:has(#t-sg:not(:checked)) .sheet.tr-v mark.sg { background: var(--gold-wash); box-shadow: inset 0 -2px 0 var(--gold-ico); }
+body:has(#t-ch:not(:checked)) .sheet.tr-v mark.ch { background: var(--green-wash); box-shadow: inset 0 -2px 0 var(--green); }
+body:has(#t-wd:not(:checked)) .sheet.tr-v mark.wd { text-decoration: underline; text-decoration-color: var(--ink2); }
+body:has(#t-ph:not(:checked)) .sheet.tr-v mark.ph { background: var(--violet-wash); }
+body:has(#t-pt:not(:checked)) .sheet.tr-v mark.pt { color: var(--violet); font-style: italic; }

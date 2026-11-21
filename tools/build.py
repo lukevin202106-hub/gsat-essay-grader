@@ -7,6 +7,8 @@
 
 國文會檢查：眉批數量對得上標記、原文跟 drafts/ 一樣、改寫版字數不超過「原文＋20」也不超過題目上限。
 英文會檢查：原文跟 drafts/ 一樣、挑錯數量對得上標記、改寫版字數不超過原文的 1.15 倍、精選字片語都補過資料（vocab.py fill）。
+有 translation（學測中譯英）時，「批改」前面多一個分頁「中譯英」，另外檢查：每題的原句拿掉 {{e:}} 後跟 drafts/ 的翻譯檔那一行一樣、
+挑錯數量對得上標記、分數＝滿分−扣分、fixed 只用 {{c:}}、alts 剛好 2 個、alts 用到的精選字片語列在該題 vocab。格式見 skills/grade/SKILL.md。
 有問題會列出來、不產生那一篇。
 """
 import json
@@ -34,6 +36,7 @@ ROOT = home()
 OUT = ROOT / "site"
 CSS = (PLUGIN / "assets" / "style.css").read_text(encoding="utf-8")
 JS = (PLUGIN / "assets" / "app.js").read_text(encoding="utf-8")
+TR_CSS = (PLUGIN / "assets" / "translation.css").read_text(encoding="utf-8")     # 只有有中譯英的頁面才包進去
 
 
 # ── 小工具 ──
@@ -104,7 +107,7 @@ ICON_SUN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" 
 ICON_MOON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.2 8.2 0 1 0 10.2 10.2z"/></svg>'
 
 
-def shell(title, desc, body, en=False, wide=False):
+def shell(title, desc, body, en=False, wide=False, tr=False):
     """一頁完整的 HTML：樣式、程式都包在裡面，字型從 Google Fonts 載入（沒網路就用系統字型）"""
     en_font = "&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400" if en else ""
     return f"""<!doctype html>
@@ -121,7 +124,7 @@ def shell(title, desc, body, en=False, wide=False):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Noto+Serif+TC:wght@400;600;700{en_font}&display=swap" rel="stylesheet">
 <style>
-{CSS}
+{CSS}{chr(10) + TR_CSS.rstrip() if tr else ""}
 </style>
 <script>try{{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}}catch(e){{}}</script>
 </head>
@@ -383,10 +386,20 @@ LV = {"big": "大錯", "small": "小改", "good": "加分"}
 VCLS = {"s": "sg", "c": "ch", "w": "wd", "p": "ph", "g": "pt"}
 VLAB = {"s": "建議用到", "c": "改過的地方", "w": "學測精選字", "p": "學測精選片語", "g": "句型"}
 PART_KEYS = ["內容", "組織", "文法句構", "字彙拼字"]
+# 學測第二大題中譯英：每題 4 分，原則上每個錯誤扣 0.5 分，同樣的錯誤只扣一次
+TR_SRC = {"t": "113 學測英文科閱卷說明（聯合新聞網）", "u": "https://udn.com/news/story/6925/7755668"}
+TR_BASIS = "中譯英每題 4 分，原則上每個錯誤扣 0.5 分，同樣的錯誤只扣一次（107、110、113 學測閱卷說明）。"
 
 
 def english_page(e):
     where = e["title"]
+    E_MARK = re.compile(r"\{\{e:([^}]+)\}\}")
+
+    def tr_where(i):
+        return f"中譯英第 {i + 1} 題"
+
+    def tr_fmt(n):
+        return num(js_round(n * 100) / 100)
 
     def need(cond, msg):
         if not cond:
@@ -429,6 +442,51 @@ def english_page(e):
                     need(body.lower() in forms[t], f"{k} 的 {{{{{t}:{body}}}}} 沒列在 vocab")
                 need(t in VCLS, f"{k} 有不認得的標記 {{{{{t}:…}}}}")
 
+    # ── 中譯英檢查（有 translation 才跑）──
+    tr = e.get("translation")
+    if tr:
+        items = tr.get("items") or []
+        need(len(items) > 0, "translation.items 是空的")
+        need(isinstance(tr.get("verdict"), str) and tr.get("verdict"), "translation 缺 verdict")
+        if tr.get("rawFile"):
+            lines = [l.strip() for l in draft(tr["rawFile"]).splitlines()]
+            while lines and not lines[-1]:
+                lines.pop()
+            need(len(lines) == len(items), f"drafts/{tr['rawFile']} 有 {len(lines)} 行，translation 有 {len(items)} 題")
+            for i, it in enumerate(items):
+                need(isinstance(it.get("original"), str) and E_MARK.sub(r"\1", it["original"]).strip() == (lines[i] if i < len(lines) else None),
+                     f"{tr_where(i)}的 original 拿掉 {{{{e:}}}} 後跟「drafts/{tr['rawFile']}」第 {i + 1} 行不一樣，學生的字被動到了")
+        for i, it in enumerate(items):
+            w = tr_where(i)
+            errs = it.get("errors") or []
+            need(it.get("zh") and it.get("original"), f"{w}缺 zh 或 original")
+            marks = E_MARK.findall(it.get("original") or "")
+            need(len(marks) == len(errs), f"{w}原句有 {len(marks)} 個 {{{{e:}}}} 標記，挑錯有 {len(errs)} 則")
+            for j, x in enumerate(errs):
+                need(x.get("level") in LV, f"{w}第 {j + 1} 則挑錯的 level 要是 big／small／good")
+                d = x.get("deduct")
+                need(isinstance(d, (int, float)) and not isinstance(d, bool) and d >= 0, f"{w}第 {j + 1} 則挑錯的 deduct 要是 0 以上的數字")
+                if x.get("level") != "big":
+                    need(d == 0, f"{w}第 {j + 1} 則是{LV.get(x.get('level'), '?')}，deduct 要是 0")
+            mx = it["max"] if it.get("max") is not None else tr.get("max")
+            cut = sum(x["deduct"] for x in errs if isinstance(x.get("deduct"), (int, float)) and not isinstance(x.get("deduct"), bool))
+            sc_ = it.get("score")
+            need(isinstance(sc_, (int, float)) and isinstance(mx, (int, float)) and abs(sc_ - max(0, mx - cut)) < 1e-9,
+                 f"{w}score {num(sc_) if isinstance(sc_, (int, float)) else sc_} 不等於 {num(mx)} − 扣分 {tr_fmt(cut)}")
+            need(it.get("fixed") and not re.search(r"\{\{[abd-z]:", it["fixed"]), f"{w}缺 fixed，或 fixed 用了 {{{{c:}}}} 以外的標記")
+            alts = it.get("alts")
+            need(isinstance(alts, list) and len(alts) == 2 and all(a.get("text") and a.get("note") for a in alts), f"{w}要有剛好 2 個 alts，每個有 text 和 note")
+            v = it.get("vocab") or {"words": [], "phrases": []}
+            tf = {"w": {x["form"].lower() for x in v.get("words", [])}, "p": {x["form"].lower() for x in v.get("phrases", [])}}
+            for x in v.get("words", []) + v.get("phrases", []):
+                need(x.get("lib"), f"{w}的 {x['id']} 還沒補字表的資料，先跑 python3 tools/vocab.py fill content/…json")
+            for t in [it.get("fixed") or ""] + [a.get("text") or "" for a in (alts if isinstance(alts, list) else [])]:
+                for m in EN_MARK.finditer(t):
+                    k, body = m.group(1), m.group(2)
+                    need(k in VCLS, f"{w}有不認得的標記 {{{{{k}:…}}}}")
+                    if k in ("w", "p"):
+                        need(body.lower() in tf[k], f"{w}的 {{{{{k}:{body}}}}} 沒列在這題的 vocab")
+
     # ── 原文作答紙 ──
     seq = {"n": 0}
 
@@ -438,7 +496,6 @@ def english_page(e):
         lv = (e["errors"][s - 1] if s - 1 < len(e["errors"]) else {}).get("level") or "small"
         return f'<mark class="err lv-{lv}" data-k="e{s}" tabindex="0" role="button" aria-label="第 {s} 處，{LV.get(lv, "")}">{m.group(1)}</mark>&#8288;<sup class="en-n lv-{lv}" data-k="e{s}" aria-hidden="true">{s}</sup>'
 
-    E_MARK = re.compile(r"\{\{e:([^}]+)\}\}")
     orig_html = "".join("<p>" + E_MARK.sub(emark, esc(p)) + "</p>" for p in e["original"]["paras"])
     tally = {k: sum(1 for x in e["errors"] if x.get("level") == k) for k in LV}
     err_html = "".join(f"""<li class="ecard lv-{x['level']}" data-k="e{i + 1}" data-lv="{x['level']}">
@@ -549,8 +606,67 @@ def english_page(e):
   <ul class="tpl">{tpl}</ul>
 </article>"""
 
+    # ── 中譯英（學測第二大題：每題 4 分，原則上每個錯誤扣 0.5 分，同樣的錯誤只扣一次）──
+    tr_html = ""
+    if tr:
+        def tvers(t):
+            return "<p>" + EN_MARK.sub(lambda m: f'<mark class="{VCLS.get(m.group(1), "")}" title="{VLAB.get(m.group(1), "")}">{m.group(2)}</mark>', esc(t)) + "</p>"
+
+        def tver(name, text, note):
+            lab = "綠底＝改過的地方" if name == "照你的改" else "另一個滿分寫法"
+            nt = f'<p class="vnote">{inline(note)}</p>' if note else ""
+            return f"""<div class="tr-ver"><div class="vhead"><h3>{name}</h3><span>{word_count(text)} 字</span></div>
+      <div class="sheet tr-v"><div class="label"><span>{lab}</span></div>{tvers(text)}</div>{nt}</div>"""
+
+        tr_total, tr_max, item_html = 0, 0, []
+        for it in tr["items"]:
+            mx = it["max"] if it.get("max") is not None else tr["max"]
+            tr_total += it["score"]
+            tr_max += mx
+            sq = {"n": 0}
+
+            def tmark(m, it=it, sq=sq):
+                sq["n"] += 1
+                s_ = sq["n"]
+                lv = (it["errors"][s_ - 1] if s_ - 1 < len(it["errors"]) else {}).get("level") or "small"
+                return f'<mark class="err lv-{lv}" data-k="t{it["no"]}e{s_}" tabindex="0" role="button" aria-label="第 {it["no"]} 題第 {s_} 處，{LV.get(lv, "")}">{m.group(1)}</mark>&#8288;<sup class="en-n lv-{lv}" data-k="t{it["no"]}e{s_}" aria-hidden="true">{s_}</sup>'
+
+            sent = E_MARK.sub(tmark, esc(it["original"]))
+            cards = "".join(f"""<li class="ecard lv-{x['level']}" data-k="t{it['no']}e{j + 1}" data-lv="{x['level']}">
+        <div class="eh"><span class="no">{j + 1}</span><span class="lv">{LV[x['level']]}</span><span class="ty">{esc(x['type'])}</span>{f'<span class="ded">−{tr_fmt(x["deduct"])}</span>' if x['deduct'] > 0 else ""}</div>
+        <p class="wn was"><span class="lab">原句</span>{en(x['was'])}</p>
+        <p class="wn now"><span class="lab">{"可以" if x['level'] == "good" else "改成"}</span>{en(x['now'])}</p>
+        <p class="why">{inline(x['why'])}</p>
+      </li>""" for j, x in enumerate(it["errors"]))
+            v = it.get("vocab") or {"words": [], "phrases": []}
+            vv = [x for x in v.get("words", []) + v.get("phrases", []) if x.get("lib")]
+            note = f'<p class="vnote">{inline(it["note"])}</p>' if it.get("note") else ""
+            body_cards = f'<ol class="ecards tr-ecards">{cards}</ol>' if cards else '<p class="fine">這一題沒有要扣的地方。</p>'
+            vers = tver("照你的改", it["fixed"], "") + "".join(tver("另一種寫法", a["text"], a["note"]) for a in it["alts"])
+            vbox = f'<details class="box"><summary>這一題用到的精選字、片語<span>{len(vv)} 個</span></summary><ul class="wlist">{"".join(wcard(x) for x in vv)}</ul></details>' if vv else ""
+            item_html.append(f"""<article class="card tr-item" id="tr-{it['no']}">
+  <div class="card-h"><h2>第 {it['no']} 題</h2><span class="count tr-score"><b>{tr_fmt(it['score'])}</b>／{num(mx)}</span></div>
+  <p class="tr-zh">{esc(it['zh'])}</p>
+  <div class="sheet tr-s"><div class="label"><span>你寫的</span><span>點波浪線看說明</span></div><p>{sent}</p></div>
+  {note}
+  {body_cards}
+  <div class="tr-vers">{vers}</div>
+  {vbox}
+</article>""")
+        tr_html = f"""<article class="card score tr-head">
+  <div>
+    <div class="big"><span class="lab">中譯英</span><span class="gold-num">{tr_fmt(tr_total)}</span><span class="of">／{num(tr_max)}</span></div>
+    <p class="verdict">{inline(tr['verdict'])}</p>
+    <p class="fine">{esc(TR_BASIS)}</p>
+  </div>
+</article>
+{chr(10).join(item_html)}"""
+
     # ── 題目與依據 ──
     b = e["basis"]
+    if tr and not any(x.get("u") == TR_SRC["u"] for x in b.get("sources") or []):
+        b = dict(b, sources=list(b.get("sources") or []) + [TR_SRC])
+    tr_basis = f"<p>{esc(TR_BASIS)}</p>\n  " if tr else ""
     rub = b.get("appRubric") or []
     rub_li = "".join("<li>" + esc(r) + "</li>" for r in rub)
     rubric = f'<h3>這一題的評分重點</h3><ul class="dots">{rub_li}</ul>' if rub else ""
@@ -574,7 +690,7 @@ def english_page(e):
 <article class="card">
   <h2>{esc(b.get('criteriaTitle') or '大考中心怎麼給分')}</h2>
   <p>{inline(b.get('criteriaIntro') or '')}</p>
-  {"".join(crit(c) for c in b.get("criteria") or [])}
+  {tr_basis}{"".join(crit(c) for c in b.get("criteria") or [])}
   {extra_html(b)}
 </article>
 <article class="card">
@@ -590,7 +706,7 @@ def english_page(e):
     <dl><div><dt>做得好</dt><dd>{inline(p['good'])}</dd></div><div><dt>扣在哪</dt><dd>{inline(p['lose'])}</dd></div><div><dt>怎麼拿滿</dt><dd>{inline(p['full'])}</dd></div></dl>
   </li>""" for p in sc["parts"])
 
-    tabs = [("review", "批改"), ("versions", "改寫"), ("words", "字與句型"), ("basis", "題目與依據")]
+    tabs = ([("trans", "中譯英")] if tr else []) + [("review", "批改"), ("versions", "改寫"), ("words", "字與句型"), ("basis", "題目與依據")]
     names = dict(tabs)
 
     def panel(pid, html, first=False):
@@ -613,14 +729,15 @@ def english_page(e):
 <div class="seg-wrap"><div class="seg" role="tablist" aria-label="這篇作文的內容">
   {seg}
 </div></div>
-{panel("review", review, True)}
+{panel("trans", tr_html, True) + chr(10) if tr else ""}{panel("review", review, not tr)}
 {panel("versions", versions)}
 {panel("words", words)}
 {panel("basis", basis)}
 <footer class="foot">{esc(e['reviewed'])}改。估分照大考中心英文作文的四項（內容、組織、文法句構、字彙拼字，各 5 分）抓的，不是正式成績，實際閱卷會差 1～2 分。<br>精選字、片語的中文與例句取自 allinone 學測精選（CC BY-NC 4.0）。用 gsat-essay-grader 批改。</footer>
 {promo('en')}
 </div>"""
-    return shell(f"{e['title']}｜作文批改", f"{e['origin']}「{e['title']}」的估分、逐句挑錯，和輕修版、高分版兩篇改寫。", body, en=True, wide=True)
+    tr_desc = "中譯英、" if tr else ""
+    return shell(f"{e['title']}｜作文批改", f"{e['origin']}「{e['title']}」的{tr_desc}估分、逐句挑錯，和輕修版、高分版兩篇改寫。", body, en=True, wide=True, tr=bool(tr))
 
 
 # ───────────────────────── 主程式 ─────────────────────────

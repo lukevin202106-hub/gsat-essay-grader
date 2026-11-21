@@ -1,6 +1,6 @@
 ---
 name: grade
-description: 學測國文、英文作文批改（gsat-essay-grader）。使用者貼作文（文字或照片）、說「改這篇」「批改作文」、或給題目加學生作文時用。英文：四項估分、逐句挑錯、輕修版／高分版改寫、學測精選字片語句型、可以套用的句子；國文：逐句眉批、總評、估分、東方思想版／西方哲學版改寫。三個等級：usual 省錢（預設）、best 最好、test 測試（全 Haiku）。成品是一篇一個 HTML 網頁，可以發佈成 Claude 網頁分享。
+description: 學測國文、英文作文批改（gsat-essay-grader）。使用者貼作文（文字或照片）、說「改這篇」「批改作文」、或給題目加學生作文時用。英文：四項估分、逐句挑錯、輕修版／高分版改寫、學測精選字片語句型、可以套用的句子，學生有交中譯英就一起批（同一頁多一個分頁）；國文：逐句眉批、總評、估分、東方思想版／西方哲學版改寫。三個等級：usual 省錢（預設）、best 最好、test 測試（全 Haiku）。成品是一篇一個 HTML 網頁，可以發佈成 Claude 網頁分享。
 ---
 
 # 作文批改流程
@@ -57,6 +57,7 @@ description: 學測國文、英文作文批改（gsat-essay-grader）。使用�
 - 認出是哪一年、哪一題（學測、參考試卷、模擬考、自訂題）。使用者沒給題目就問。
 - `order` 用 `python3 tools/ws.py next`，`slug` 用英文小寫短字。`reviewed` 寫今天（「2026 年 11 月 17 日」這種寫法）。
 - 英文的建議用字：題目有列（「提示」「建議使用」）就照列，`suggest.by` 寫 `prompt`；沒有列就從學測精選挑 5 個字＋3 個片語或句型（`python3 tools/vocab.py hard 關鍵字`、`patterns 關鍵字` 找跟題目有關的），`suggest.by` 寫 `teacher`，學生沒看過清單，不因沒用到扣分。每一個用 `vocab.py word`／`patterns` 確認 id。
+- **中譯英（學測英文的翻譯題，學生有交才做；目前只做「作文加翻譯」，不能只交翻譯）**：學生的句子一行一題、一個字不動（學生沒寫句點就不加），存 `drafts/<名稱>_翻譯.txt`；`intake.json` 加 `"translation": {"rawFile": "<名稱>_翻譯.txt", "max": 4, "items": [{"no": 1, "zh": "題目中文"}, …]}`。結果跟作文放同一頁（「中譯英」是第一個分頁），不開新的子代理：診斷順便批、輕修改寫順便寫三種寫法、輕修盲審順便審。沒有翻譯就不加這一塊，頁面跟以前一樣。
 
 英文 `intake.json`：
 
@@ -100,6 +101,21 @@ description: 學測國文、英文作文批改（gsat-essay-grader）。使用�
 - `original.paras` 拿掉 `{{e:}}` 後要跟原稿逐字相同；第 n 個 `{{e:}}` 對第 n 則 `errors`。
 - `level`：big 大錯／small 小改／good 加分。四項加起來＝`value`。
 
+**中譯英**（intake 有 `translation` 才做）：`diagnosis.json` 多一塊 `translation`：
+
+```json
+"translation": {"verdict": "整體一兩句（中文）",
+  "items": [{"score": 3, "original": "Many students {{e:spends}} too much time on {{e:phone}}",
+             "errors": [{"level": "big", "type": "主詞動詞一致", "was": "spends", "now": "spend", "why": "中文說明", "deduct": 0.5}],
+             "note": "一行中文"}]}
+```
+
+- 評分照大考中心 107、110、113 學測閱卷說明：每題 4 分，原則上每個錯誤扣 0.5 分，**同樣的錯誤只扣一次**。不要自己發明「以詞塊算」之類的規則。
+- `original` 是 `drafts/<名稱>_翻譯.txt` 那一行，拿掉 `{{e:}}` 後要逐字相同（含沒有句點）；第 n 個 `{{e:}}` 對第 n 則 `errors`。
+- `level`：`big`（要扣，`deduct` 0.5）、`small`（可以更好，`deduct` 0）、`good`（用得好，`deduct` 0）。同一個錯誤再出現：第二次 `deduct` 0，`why` 說「同樣的錯誤，不再扣」。
+- `score` ＝ `max` − 所有 `deduct` 加總（最少 0）。build 會算。
+- `note` 一行中文，`verdict` 一兩句；語氣照下面「語氣」。
+
 國文 `diagnosis.json`：`list`（`sub`、`est`、`estNote`）、`score`（`label`、`value`、`max`、`verdict`、`parts[{k, v, max, why}]`、`fine`）、`original.parts`（`label`／`title`／`limit`、`paras[{text, notes[{t, body, fix, tag}]}]`）、`overall`（`good`、`fixes[{t, d}]`、`closingTitle`、`closing`，知性題可加 `rewrite`）。格式照 `${CLAUDE_PLUGIN_ROOT}/examples/content/02-caged-bird.json`。
 
 國文級分：情意題一整篇 25 分（A＋ 25–22、A 21–18、B＋ 17–14、B 13–10、C＋ 9–6、C 5–1）；知性題分兩小題（4＋21）。題目字數限制上下約 15% 內不提、不扣分。
@@ -117,11 +133,23 @@ description: 學測國文、英文作文批改（gsat-essay-grader）。使用�
 
 國文 `east.json`／`west.json`：一個版本物件，格式照範例的 `versions[0]`。
 
+**中譯英**（intake 有 `translation`，由輕修版的改寫子代理一起寫，不另開）：`light.json` 多一塊 `translation`，每題一個，順序跟 intake 一樣：
+
+```json
+"translation": [{"fixed": "照學生的句子改到滿分，只用 {{c:}} 標改過的字",
+                 "alts": [{"text": "另一種滿分寫法，可用 {{w:}} {{p:}} {{g:}}", "note": "中文：結構換了什麼"},
+                          {"text": "…", "note": "…"}],
+                 "vocab": {"words": [{"id": "core-2/reduce", "form": "reduce"}], "phrases": []}}]
+```
+
+- `fixed`：照學生的骨架只改錯的地方，句尾補句點，只用 `{{c:}}`；`alts` 剛好 2 個，各自是滿分的完整句，結構不同（子句、分詞、主動被動、換片語），`note` 說換了什麼。
+- `alts` 用到的精選字、片語要列在該題 `vocab`（id 用 `python3 tools/vocab.py word 字` 查，一定要真的；`merge.py` 接著跑的 `vocab.py fill` 會補字卡，跟作文用同一套），標記跟作文高分版一樣。
+
 字數：英文不超過原文 1.15 倍、不少於題目最低字數；國文不比原文多 20 字、不超過題目上限。
 
 ### 5 盲審（essay-reviewer）
 
-每版開一個新的 reviewer，只給那一版的檔案、原稿路徑和核對引文用的筆記。意見寫 `review-<版>.json`，主線用 SendMessage 把路徑交回寫那一版的 rewriter 修（沒有 SendMessage 就開一個新的 rewriter，給它原檔＋意見）。只審一輪。交回修稿時提醒：標記包太長就縮小到真正改的字，不要為了拆標記多出一堆眉批；引文意思要整段一致。
+每版開一個新的 reviewer，只給那一版的檔案、原稿路徑和核對引文用的筆記。有中譯英時，輕修版那個 reviewer 一併審 `light.json` 的 `translation`（同一個 reviewer，不另開）：`fixed` 與 `alts` 的文法、搭配、是不是真的滿分句、標記、`vocab`。意見寫 `review-<版>.json`，主線用 SendMessage 把路徑交回寫那一版的 rewriter 修（沒有 SendMessage 就開一個新的 rewriter，給它原檔＋意見）。只審一輪。交回修稿時提醒：標記包太長就縮小到真正改的字，不要為了拆標記多出一堆眉批；引文意思要整段一致。
 
 ### 6 拼檔與檢查
 
@@ -130,6 +158,8 @@ cd <工作資料夾>
 python3 "${CLAUDE_PLUGIN_ROOT}/tools/merge.py" work/<slug>          # 拼成 content/NN-slug.json；英文接著補字表的中文例句並檢查標記
 python3 "${CLAUDE_PLUGIN_ROOT}/tools/build.py" content/NN-slug.json  # 原稿比對、標記數量、字數上限；有問題會列出來、不產生網頁
 ```
+
+有中譯英時 build 多檢查：每題 `original` 拿掉 `{{e:}}` 後等於 `drafts/` 翻譯檔那一行、`{{e:}}` 數量等於 `errors` 數、`score` ＝ `max` − Σ`deduct`、`small`／`good` 的 `deduct` 是 0、`fixed` 只有 `{{c:}}`、`alts` 剛好 2 個、用到的 `{{w:}}` `{{p:}}` 列在該題 `vocab` 且補過字卡。頁面多一個第一分頁「中譯英」，「題目與依據」多一句扣分基準與 113 學測閱卷說明的出處。
 
 ### 7 讀一遍、發佈、回報（主線）
 

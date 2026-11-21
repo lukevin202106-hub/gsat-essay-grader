@@ -6,10 +6,13 @@
 work/<slug>/ 裡的分件：
   英文：intake.json（主線）、research.json（收集）、diagnosis.json（診斷）、light.json、high.json（改寫）
   國文：intake.json（主線）、basis.json（主線依收集整理）、diagnosis.json（診斷）、east.json、west.json（改寫）
+英文有中譯英時：intake.json 的 translation（rawFile、max、items[{no, zh}]）、diagnosis.json 的 translation（verdict、items）、
+light.json 的 translation（每題 fixed、alts、vocab）會一起拼成批改檔的 translation（見 merge_translation）。
 review*.json（盲審）不拼進去，只是給改寫的子代理修稿用。
 英文 research.json 有 page 欄位時，網頁的「題目與依據」只放 page 的精簡版，完整的留在 bank/。
 """
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -52,6 +55,36 @@ def page_basis(rs):
     return b
 
 
+def merge_translation(it, dg, lt):
+    """中譯英：intake（題目中文）＋diagnosis（原句標記、扣分）＋light（三種寫法、精選字）→ 批改檔的 translation。
+    student 是學生原句（drafts/<rawFile> 的那一行，一個字都不動）；拿掉 {{e:}} 後要跟它一樣。"""
+    ti, td, tl = it["translation"], dg.get("translation"), lt.get("translation")
+    if not td or not tl:
+        sys.exit("intake.json 有 translation，diagnosis.json 或 light.json 卻沒有 translation")
+    n = len(ti["items"])
+    if len(td["items"]) != n or len(tl) != n:
+        sys.exit(f"中譯英題數對不上：intake {n}、diagnosis {len(td['items'])}、light {len(tl)}")
+    raw_path = home() / "drafts" / ti["rawFile"]
+    if not raw_path.exists():
+        sys.exit(f"少了 {raw_path}（學生的翻譯，一行一題）")
+    raw = [x.strip() for x in raw_path.read_text(encoding="utf-8").splitlines()]
+    while raw and not raw[-1]:
+        raw.pop()
+    if len(raw) != n:
+        sys.exit(f"drafts/{ti['rawFile']} 有 {len(raw)} 行，intake 有 {n} 題")
+    mx = ti.get("max", 4)
+    items = []
+    for q, a, b, line in zip(ti["items"], td["items"], tl, raw):
+        stripped = re.sub(r"\{\{e:([^}]+)\}\}", r"\1", a["original"]).strip()
+        if stripped != line:
+            sys.exit(f"中譯英第 {q['no']} 題：diagnosis 的 original 拿掉 {{{{e:}}}} 後跟原稿不一樣\n  原稿：{line}\n  診斷：{stripped}")
+        items.append({"no": q["no"], "zh": q["zh"], "student": line, "score": a["score"], "max": mx,
+                      "original": a["original"], "errors": a["errors"], "note": a.get("note", ""),
+                      "fixed": b["fixed"], "alts": b["alts"],
+                      "vocab": b.get("vocab") or {"words": [], "phrases": []}})
+    return {"verdict": td["verdict"], "max": mx, "rawFile": ti["rawFile"], "items": items}
+
+
 def merge_en(d, it):
     rs, dg, lt, hi = load(d, "research.json"), load(d, "diagnosis.json"), load(d, "light.json"), load(d, "high.json")
     n = len(it["suggest"]["items"])
@@ -59,7 +92,7 @@ def merge_en(d, it):
         if len(x) != n:
             sys.exit(f"{name}.json 的 suggestUse 有 {len(x)} 個，建議用字有 {n} 個")
     sc = dg["score"]
-    return {
+    doc = {
         "schema": 1, "subject": "en", "tier": it.get("tier", "usual"),
         **{k: it[k] for k in ("slug", "order", "tile", "kind", "title", "origin", "reviewed", "rawFile") if k in it},
         "list": {"sub": (it.get("list") or {}).get("sub", ""), "est": str(sc["value"]), "estNote": "估分／20"},
@@ -75,6 +108,9 @@ def merge_en(d, it):
         "vocab": hi["vocab"], "patterns": hi["patterns"], "templates": hi["templates"],
         "basis": {"appRubric": it.get("rubric") or it.get("appRubric") or [], **page_basis(rs)},
     }
+    if it.get("translation"):
+        doc["translation"] = merge_translation(it, dg, lt)
+    return doc
 
 
 def merge_zh(d, it):

@@ -25,6 +25,14 @@ model: sonnet
 - 估分四項各 5 分：內容、組織、文法句構、字彙拼字。每項寫 `good`（做得好）、`lose`（扣在哪，指到第幾處）、`full`（怎麼拿滿）。總分＝四項加總，`range` 是上下 1 分。
 - `suggestUse`：建議用字每一個一列，`used`（原文有沒有用到、用對）、`orig`（原文怎麼寫的，例如「寫成 reduce generation gap（少了 the）」或「沒用到」）。
 
+## 英文中譯英（intake.json 有 `translation` 才做，順便批，不另開）
+
+- 讀 intake 的 `translation.items`（題目中文）和 `drafts/<rawFile>`（學生的句子，一行一題），在 `diagnosis.json` 加 `translation`：`verdict`（一兩句中文）、`items`（每題 `score`、`original`、`errors`、`note`），格式照 SKILL.md 裡「中譯英」那一段。
+- 每題 4 分，照 107、110、113 學測閱卷說明：原則上每個錯誤扣 0.5 分，同樣的錯誤只扣一次（第二次 `level` 仍寫 `big`，`deduct` 0，`why` 說明「同樣的錯誤，不再扣」）。不要自己發明「詞塊」之類的算法。
+- `original` 是學生那一行，一個字不動（沒有句點就不加），錯處用 `{{e:}}` 包，第 n 個標記對第 n 則 `errors`。`small` 與 `good` 的 `deduct` 是 0。
+- `score` ＝ 4 − 所有 `deduct` 加總（最少 0）。寫完自己加一次。
+- 評的是翻得對不對、通順不通順：時態、冠詞、單複數、主詞動詞一致、詞性、搭配、漏譯或多譯、拼字。題目中文有的意思沒翻到，算錯。
+
 ## 國文
 
 - 原文標記：`{{x:字詞}}`、`{{s:句子}}`、`{{l:文意與結構}}`、`{{g:可以留著的}}`，每個標記對一則眉批（`notes` 依序），眉批的 `t` 要跟標記一樣。要改的給 `fix`。

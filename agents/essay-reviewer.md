@@ -15,6 +15,12 @@ model: haiku
 - 標記：`{{w:字}}` 要是學測精選（`vocab.py word 字` 有 ★ 才對），`{{p:}}` 的那段字要真的是那個片語。
 - 字數：`vocab.py scan -f 檔案` 看第一行。
 
+英文中譯英（審輕修版時，`light.json` 有 `translation` 就一起審，意見寫在同一份 review 的 `issues`，`file` 寫 `light.json`、`where` 寫「中譯英第 n 題 fixed／alts[i]」）：
+- `fixed`、`alts` 有沒有文法錯、搭配不道地、漏掉題目中文的意思、多出題目沒有的內容。
+- `fixed` 只能有 `{{c:}}`；`alts` 剛好 2 個、結構真的不同、是完整句。
+- `{{w:}}` 要是學測精選（`vocab.py word` 有 ★），而且列在該題 `vocab`；`vocab` 的 id 是真的。
+- 對照原稿的翻譯檔（`drafts/<rawFile>`）：`fixed` 是不是照學生的句子改，沒有重寫成另一句。
+
 國文：
 - 引文逐字對原典（主線給的研究筆記）。差一個字就列出來。引文的意思有沒有被截一半、用到相反。
 - 錯字、語病、成語誤用。

@@ -1,6 +1,6 @@
 ---
 name: gsat-essay-grader
-description: 學測國文、英文作文批改器。使用者貼作文（文字或照片）、說「改這篇」「批改作文」、或給題目加學生作文時用。英文：四項估分、逐句挑錯、輕修版與高分版改寫、學測精選字片語句型、可以套用的句子；國文：逐句眉批、總評、估分、東方思想版與西方哲學版改寫。成品是一個 HTML 網頁檔，可以下載、傳給學生。
+description: 學測國文、英文作文批改器。使用者貼作文（文字或照片）、說「改這篇」「批改作文」、或給題目加學生作文時用。英文：四項估分、逐句挑錯、輕修版與高分版改寫、學測精選字片語句型、可以套用的句子，學生有交中譯英就一起批（同一頁多一個分頁）；國文：逐句眉批、總評、估分、東方思想版與西方哲學版改寫。成品是一個 HTML 網頁檔，可以下載、傳給學生。
 ---
 
 # 作文批改器（Claude 網頁版）
@@ -24,10 +24,11 @@ description: 學測國文、英文作文批改器。使用者貼作文（文字�
 
 1. **收件**：使用者給的是照片就照手寫打字；錯字、標點、大小寫照原樣，存 `drafts/<名稱>.txt`（英文兩段之間空一行）。學生匿名。認出是哪一年、哪一題；沒給題目就問。照下面的格式寫 `work/<slug>/intake.json`（`order` 用 `python3 <技能>/tools/ws.py next`，`tier` 寫 `"web"`）。
    - 英文的建議用字：題目有列就照列（`suggest.by`＝`prompt`）；沒有列就從學測精選挑 5 個字＋3 個片語或句型（`python3 <技能>/tools/vocab.py hard 關鍵字`、`patterns 關鍵字`），`suggest.by`＝`teacher`。每一個用 `vocab.py word`／`patterns` 確認 id。
+   - **中譯英**（學測英文的翻譯題，學生有交才做；目前只做「作文加翻譯」，不能只交翻譯）：學生的句子一行一題、一個字不動，存 `drafts/<名稱>_翻譯.txt`；`intake.json` 加 `"translation"`（格式見下）。結果跟作文同一頁，「中譯英」是第一個分頁。診斷、輕修版、自己審那一步都順便做，不另開步驟。
 2. **收集資料**（讀 `roles/essay-collector.md`）：用網路搜尋。國文四項寫成 `bank/zh/<題目>/grading.md`、`sources.md`、`east.md`、`west.md`，再整理成 `work/<slug>/basis.json`（格式照 `<技能>/examples/content/02-caged-bird.json` 的 `basis`）。英文寫 `work/<slug>/research.json`（大考中心英文作文評分原則）。筆記寫精簡就好，不用把網頁整段貼進來。
-3. **診斷**（讀 `roles/essay-diagnoser.md`）：寫 `work/<slug>/diagnosis.json`。寫完看一眼估分和挑錯數量合不合理。
-4. **改寫兩版**（讀 `roles/essay-rewriter.md`）：英文 `light.json`、`high.json`；國文 `east.json`、`west.json`。
-5. **自己審一次**（讀 `roles/essay-reviewer.md`）：把自己當成沒看過前面過程的人，只讀兩版改寫檔和原稿，逐條列出問題（文法、搭配、標記、引文跟原典對不對、語氣），列完再一條一條改。
+3. **診斷**（讀 `roles/essay-diagnoser.md`，有中譯英就讀它的「英文中譯英」那節）：寫 `work/<slug>/diagnosis.json`。寫完看一眼估分和挑錯數量合不合理。
+4. **改寫兩版**（讀 `roles/essay-rewriter.md`）：英文 `light.json`（有中譯英就多寫 `translation`）、`high.json`；國文 `east.json`、`west.json`。
+5. **自己審一次**（讀 `roles/essay-reviewer.md`）：把自己當成沒看過前面過程的人，只讀兩版改寫檔和原稿，逐條列出問題（文法、搭配、標記、引文跟原典對不對、語氣；有中譯英就連 `light.json` 的 `translation` 一起審），列完再一條一條改。
 6. **拼檔、檢查、產生網頁**：
    ```
    cd /home/claude/essays
@@ -50,12 +51,17 @@ description: 學測國文、英文作文批改器。使用者貼作文（文字�
  "rubric": ["題目附的評分重點（有才寫）"]}
 ```
 
+英文有中譯英時，`intake.json` 加：`"translation": {"rawFile": "<名稱>_翻譯.txt", "max": 4, "items": [{"no": 1, "zh": "題目中文"}, …]}`。
+
 國文 `intake.json`：`{"subject": "zh", "slug", "order", "kind": "知性題｜情意題", "tile": "知｜情", "title", "origin", "reviewed", "rawFile", "tier": "web", "prompt": {"stem": "題目全文"}}`
 
 英文 `diagnosis.json`：`score`（`value`、`range`、`verdict`、`parts` 四項：內容、組織、文法句構、字彙拼字，各有 `k`、`v`、`good`、`lose`、`full`）、`original.paras`（學生原文，要說的地方用 `{{e:原文那幾個字}}` 包起來）、`errors`（依序一則對一處：`level` big／small／good、`type`、`was`、`now`、`why`）、`suggestUse`（建議用字每一個一列：`used`、`orig`）。四項加起來＝`value`；`original.paras` 拿掉標記要跟原稿逐字相同。
 
 英文 `light.json`：`paras`（標記 `{{s:}}` 建議用字、`{{c:}}` 改過的地方）、`note`、`summary`、`est`、`suggestUse`（每個建議字在這版怎麼用）。
 英文 `high.json`：同上，標記 `{{s:}}`、`{{w:}}` 精選字、`{{p:}}` 精選片語、`{{g:}}` 句型；另有 `vocab`（`words`、`phrases`：每個標記一條 `{"id", "form"}`，id 從 vocab.py 抄）、`patterns`（6～9 個：`name`、`formula`、`ex`、`why`）、`templates`（6～8 句：`use`、`sent`、`note`）。
+
+英文中譯英 `diagnosis.json` 多一塊 `translation`：`{"verdict": "一兩句中文", "items": [{"score": 3, "original": "Many students {{e:spends}} too much time on {{e:phone}}", "errors": [{"level": "big", "type": "主詞動詞一致", "was": "spends", "now": "spend", "why": "中文說明", "deduct": 0.5}], "note": "一行中文"}]}`。照 107、110、113 學測閱卷說明：每題 4 分，原則上每個錯誤扣 0.5 分，同樣的錯誤只扣一次（第二次 `deduct` 0，`why` 說「同樣的錯誤，不再扣」）；不要自己發明「詞塊」算法。`original` 是翻譯檔那一行，拿掉 `{{e:}}` 後逐字相同（含沒有句點）；第 n 個 `{{e:}}` 對第 n 則 `errors`；`level` 是 big（要扣，`deduct` 0.5）、small、good（`deduct` 0）；`score` ＝ 4 − `deduct` 加總（最少 0）。
+英文中譯英 `light.json` 多一塊 `translation`（每題一個，順序同 intake）：`[{"fixed": "照學生的句子改到滿分，只用 {{c:}} 標改過的字，句尾補句點", "alts": [{"text": "另一種滿分寫法，結構不同，可用 {{w:}} {{p:}} {{g:}}", "note": "中文：結構換了什麼"}, {"text": "…", "note": "…"}], "vocab": {"words": [{"id": "core-2/reduce", "form": "reduce"}], "phrases": []}}]`。`alts` 剛好 2 個；用到的精選字、片語列在該題 `vocab`，id 從 vocab.py 抄。
 
 國文 `diagnosis.json`：`list`（`sub`、`est`、`estNote`）、`score`（`label`、`value`、`max`、`verdict`、`parts[{k, v, max, why}]`、`fine`）、`original.parts`（`label`／`title`／`limit`、`paras[{text, notes[{t, body, fix, tag}]}]`，標記 `{{x:字詞}}`、`{{s:句子}}`、`{{l:文意與結構}}`、`{{g:留著的}}`，一個標記一則眉批）、`overall`（`good`、`fixes[{t, d}]`、`closingTitle`、`closing`）。
 國文 `east.json`／`west.json`：格式照範例的 `versions[0]`。

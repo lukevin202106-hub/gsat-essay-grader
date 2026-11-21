@@ -297,47 +297,66 @@ def cmd_hard(kw=None):
 
 def cmd_fill(path):
     """批改檔（英文）：light／high 段落裡的 {{w:字}} 要對得到 vocab.words 的 form、{{p:片語}} 要對得到 vocab.phrases 的 form；
-    補上字表的中文、例句、級別，寫回 vocab.*[].lib。"""
+    有中譯英（translation）的，每題 fixed／alts 的標記要對得到該題 vocab 的 form；
+    補上字表的中文、例句、級別，寫回 vocab.*[].lib（翻譯的字卡也是同一套）。"""
     own, fam, _ = index()
     d = json.loads(Path(path).read_text(encoding="utf-8"))
     vw, vp = d["vocab"]["words"], d["vocab"]["phrases"]
     errs = []
-    for x in vw:
-        c = word_card(x["id"])
-        if c["gsat"] or not x.get("lib"):          # 不在字表、已經自己寫過 lib 的（例如課本字）留著
-            x["lib"] = c
-        if not c["gsat"] and not x.get("note"):
-            errs.append(f"vocab.words：{x['id']}（{x['form']}）不在學測精選，要寫 note 說明為什麼列")
-    for x in vp:
-        c = phrase_card(x["id"])
-        if c["gsat"] or not x.get("lib"):
-            x["lib"] = c
-        if not c["gsat"] and not x.get("note"):
-            errs.append(f"vocab.phrases：{x['id']} 不在精選片語，要寫 note 說明為什麼列")
-    forms_w = {x["form"].lower(): x for x in vw}
-    forms_p = {x["form"].lower(): x for x in vp}
+
+    def fill(words, phrases, where):
+        for x in words:
+            c = word_card(x["id"])
+            if c["gsat"] or not x.get("lib"):          # 不在字表、已經自己寫過 lib 的（例如課本字）留著
+                x["lib"] = c
+            if not c["gsat"] and not x.get("note"):
+                errs.append(f"{where}vocab.words：{x['id']}（{x['form']}）不在學測精選，要寫 note 說明為什麼列")
+        for x in phrases:
+            c = phrase_card(x["id"])
+            if c["gsat"] or not x.get("lib"):
+                x["lib"] = c
+            if not c["gsat"] and not x.get("note"):
+                errs.append(f"{where}vocab.phrases：{x['id']} 不在精選片語，要寫 note 說明為什麼列")
+
+    def check(para, where, words, phrases):
+        forms_w = {x["form"].lower(): x for x in words}
+        forms_p = {x["form"].lower(): x for x in phrases}
+        plain = MARK.sub(lambda m: m.group(2), para)
+        for t, body in MARK.findall(para):
+            if t == "w":
+                x = forms_w.get(body.lower())
+                ids = {i for _, tl in tokens(body) for i in set(own.get(tl, ())) | set(fam.get(tl, ()))}
+                if not x:
+                    errs.append(f"{where} {{{{w:{body}}}}} 沒列在 vocab.words")
+                elif x["id"] not in ids and not x.get("note"):
+                    errs.append(f"{where} {{{{w:{body}}}}} 的字形對不上 {x['id']}")
+            elif t == "p":
+                x = forms_p.get(body.lower())
+                if not x:
+                    errs.append(f"{where} {{{{p:{body}}}}} 沒列在 vocab.phrases")
+                elif x["lib"]["gsat"] and not phrase_fits(body, plain, db()["phById"][x["id"]]) and not x.get("note"):
+                    errs.append(f"{where} {{{{p:{body}}}}} 比對不到片語「{x['lib']['phrase']}」（{x['id']}）")
+
+    fill(vw, vp, "")
     for ver in ("light", "high"):
         for pi, para in enumerate(d[ver]["paras"]):
-            plain = MARK.sub(lambda m: m.group(2), para)
-            for t, body in MARK.findall(para):
-                if t == "w":
-                    x = forms_w.get(body.lower())
-                    ids = {i for _, tl in tokens(body) for i in set(own.get(tl, ())) | set(fam.get(tl, ()))}
-                    if not x:
-                        errs.append(f"{ver} 第 {pi + 1} 段 {{{{w:{body}}}}} 沒列在 vocab.words")
-                    elif x["id"] not in ids and not x.get("note"):
-                        errs.append(f"{ver} 第 {pi + 1} 段 {{{{w:{body}}}}} 的字形對不上 {x['id']}")
-                elif t == "p":
-                    x = forms_p.get(body.lower())
-                    if not x:
-                        errs.append(f"{ver} 第 {pi + 1} 段 {{{{p:{body}}}}} 沒列在 vocab.phrases")
-                    elif x["lib"]["gsat"] and not phrase_fits(body, plain, db()["phById"][x["id"]]) and not x.get("note"):
-                        errs.append(f"{ver} 第 {pi + 1} 段 {{{{p:{body}}}}} 比對不到片語「{x['lib']['phrase']}」（{x['id']}）")
+            check(para, f"{ver} 第 {pi + 1} 段", vw, vp)
+    n_tr = 0
+    for it in (d.get("translation") or {}).get("items") or []:
+        v = it.setdefault("vocab", {"words": [], "phrases": []})
+        v.setdefault("words", [])
+        v.setdefault("phrases", [])
+        w = f"中譯英第 {it.get('no')} 題："
+        fill(v["words"], v["phrases"], w)
+        n_tr += len(v["words"]) + len(v["phrases"])
+        for k, text in [("fixed", it.get("fixed", ""))] + [(f"alts[{i}]", a.get("text", "")) for i, a in enumerate(it.get("alts") or [])]:
+            check(text, f"{w}{k}", v["words"], v["phrases"])
     high = " ".join(MARK.sub(lambda m: m.group(2), p) for p in d["high"]["paras"])
     marked = {x["id"] for x in vw}
     unmarked = [f"{tok}（{wid}）" for tok, tl in tokens(high) for wid in sorted(own.get(tl, ())) if wid not in marked]
     Path(path).write_text(json.dumps(d, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    print(f"補好 {len(vw)} 個字、{len(vp)} 條片語 → {path}")
+    extra = f"（另有中譯英的 {n_tr} 張字卡）" if n_tr else ""
+    print(f"補好 {len(vw)} 個字、{len(vp)} 條片語{extra} → {path}")
     if unmarked:
         print("高分版裡還有沒標的精選字（不一定要標，基本字可以不標）：" + "、".join(dict.fromkeys(unmarked)))
     if errs:

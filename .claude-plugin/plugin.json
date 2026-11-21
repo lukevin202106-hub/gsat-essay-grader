@@ -1,7 +1,7 @@
 {
   "name": "gsat-essay-grader",
-  "version": "0.2.1",
-  "description": "學測國文、英文作文批改器：用你自己的 Claude 批改作文，估分、逐句眉批或挑錯、兩版改寫，產生一頁可以分享的網頁。",
+  "version": "0.3.0",
+  "description": "學測國文、英文作文批改器：用你自己的 Claude 批改作文，估分、逐句眉批或挑錯、兩版改寫（英文另有學測中譯英），產生一頁可以分享的網頁。",
   "author": {
     "name": "allinone"
   },
